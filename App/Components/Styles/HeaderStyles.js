@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  viewStyle: {
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
@@ -11,7 +11,7 @@ export default StyleSheet.create({
     shadowOpacity: 0.2,
     elevation: 2,
   },
-  textStyle: {
+  headerText: {
     fontSize: 20
   }
 });

@@ -4,8 +4,8 @@ import styles from './Styles/HeaderStyles';
 
 const Header = (props) => {
   return(
-    <View style={styles.viewStyle}>
-      <Text style={styles.textStyle}>{props.headerText}</Text>
+    <View style={styles.container}>
+      <Text style={styles.headerText}>{props.headerText}</Text>
     </View>
   );
 };
