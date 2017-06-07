@@ -8,13 +8,10 @@ import { View,
 } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-class RestaurantAdd extends Component {
+export default class RestaurantAdd extends Component {
   constructor() {
     super();
-    this.state = {
-      restaurant = '',
-      place_id = ''
-    };
+
   }
 
   onRestaurantAdd() {
@@ -94,3 +91,9 @@ class RestaurantAdd extends Component {
     </View>
   }
 }
+
+const styles = StyleSheet.create({
+  heading: {
+    flex: 1
+  }
+});
