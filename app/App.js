@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import RootContainer from './RootContainer';
-import Reducers from '../reducers';
+import Reducers from './reducers';
 
 class App extends Component {
   render() {
