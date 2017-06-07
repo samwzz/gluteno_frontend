@@ -9,12 +9,8 @@ class RootContainer extends Component {
   render() {
     return(
       <View>
-
-        <Header />
-        <AuthForm />
-
-        <Header headerText={"See-n-Me"} />
-        <Login />
+        <Header headerText={"restarants nearby"} />
+        <RestaurantList />
 
       </View>
     );
