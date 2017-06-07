@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import Header from '../Components/Header';
 
 class RootContainer extends Component {
-  render () {
+  render() {
     return(
       <View>
         <Header headerText={"See-n-Me"} />
