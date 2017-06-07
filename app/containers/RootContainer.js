@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import Header from '../Components/Header';
-import AuthForm from '../Components/AuthForm';
-import Login from '../Components/Login';
-import RestaurantList from '../Containers/RestaurantList';
+import Header from '../components/Header';
+import AuthForm from '../components/AuthForm';
+import Login from '../components/Login';
+import RestaurantList from '../containers/RestaurantList';
 
 class RootContainer extends Component {
   render() {
