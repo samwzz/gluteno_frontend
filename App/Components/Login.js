@@ -65,6 +65,7 @@ class Login extends Component {
         console.log("error " + error);
         // this.setState({showProgress: false});
     });
+    console.log("logged in");
   }
 
   render() {
