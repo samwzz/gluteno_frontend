@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
-import { View, Image, Text, Button } from 'react-native';
-import AuthForm from '../Components/AuthForm';
+import { View,
+  Text,
+  TextInput,
+  TouchableHighlight,
+  AsyncStorage,
+  StyleSheet
+} from 'react-native';
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       fname: "",
       lname: "",
@@ -14,55 +19,102 @@ class SignUp extends Component {
     };
   }
 
-  update = (field) => text => {
-    this.setState({ [field]: text })
+  onSignupPressed() {
+    
   }
 
   render() {
-    return (
-      <View>
-
-        <Text>
-          Logo Here
+    return(
+      <View style={styles.container}>
+        <Text style={styles.heading}>
+          SignUp for See-n-Me
         </Text>
 
-        <View>
-          <AuthForm
-            placeholder='First Name'
-            onChangeText={this.update('fname')}
-            value={this.state.fname}
-            />
-          <AuthForm
-            placeholder='Last Name'
-            onChangeText={this.update('lname')}
-            value={this.state.lname}
-            />
-          <AuthForm
-            placeholder='Email'
-            onChangeText={this.update('email')}
-            value={this.state.email}
-            />
-          <AuthForm
-            placeholder='Username'
-            onChangeText={this.update('username')}
-            value={this.state.username}
-            />
-          <AuthForm
-            placeholder='Password'
-            onChangeText={this.update('password')}
-            value={this.state.password}
-            />
-          <Button
-            title='SIGN UP'
-            onPress={this.handleSignUp}
-            />
-        </View>
+        <TextInput
+          onChangeText={ (text)=> this.setState({fname: text}) }
+          style={styles.input} placeholder="First Name">
+        </TextInput>
+
+        <TextInput
+          onChangeText={ (text)=> this.setState({lname: text}) }
+          style={styles.input} placeholder="Last Name">
+        </TextInput>
+
+        <TextInput
+          onChangeText={ (text)=> this.setState({email: text}) }
+          style={styles.input} placeholder="Email">
+        </TextInput>
+
+        <TextInput
+          onChangeText={ (text)=> this.setState({username: text}) }
+          style={styles.input} placeholder="Username">
+        </TextInput>
+
+        <TextInput
+          onChangeText={ (text)=> this.setState({password: text}) }
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}>
+        </TextInput>
+
+        <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
+          <Text style={styles.buttonText}>
+            Login
+          </Text>
+        </TouchableHighlight>
+
+        <Text style={styles.error}>
+          {this.state.error}
+        </Text>
       </View>
     );
   }
 }
 
 // Pass in props and dispatches here
+
+// Styles
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    padding: 10,
+    paddingTop: 80
+  },
+  input: {
+    height: 50,
+    marginTop: 10,
+    padding: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48bbec'
+  },
+  button: {
+    height: 50,
+    backgroundColor: '#48BBEC',
+    alignSelf: 'stretch',
+    marginTop: 10,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 22,
+    color: '#FFF',
+    alignSelf: 'center'
+  },
+  heading: {
+    fontSize: 30,
+  },
+  error: {
+    color: 'red',
+    paddingTop: 10
+  },
+  success: {
+    color: 'green',
+    paddingTop: 10
+  }
+});
 
 
 export default SignUp;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import SignUp from '../Containers/SignUp';
 
 class AuthForm extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class AuthForm extends Component {
   render() {
     return (
       <View>
+        <SignUp />
       </View>
     );
   }
