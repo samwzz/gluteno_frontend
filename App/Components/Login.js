@@ -19,6 +19,18 @@ class Login extends Component {
     };
   }
 
+  storeToken(responseData){
+    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
+      if (err){
+        console.log("an error");
+        throw err;
+      }
+      console.log("success");
+    }).catch((err)=> {
+        console.log("error is: " + err);
+    });
+  }
+
   onLoginPressed() {
     fetch('https://test.com', {
       method: 'POST',
@@ -51,7 +63,7 @@ class Login extends Component {
     .catch((error) => {
         this.setState({error: error});
         console.log("error " + error);
-        this.setState({showProgress: false});
+        // this.setState({showProgress: false});
     });
   }
 
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
     padding: 10,
     paddingTop: 80
   },
@@ -104,14 +116,14 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#48BBEC',
+    backgroundColor: '#48bbec',
     alignSelf: 'stretch',
     marginTop: 10,
     justifyContent: 'center'
   },
   buttonText: {
     fontSize: 22,
-    color: '#FFF',
+    color: '#fff',
     alignSelf: 'center'
   },
   heading: {
