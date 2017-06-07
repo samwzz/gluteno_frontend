@@ -6,7 +6,7 @@ class RootContainer extends Component {
   render () {
     return(
       <View>
-        <Header />
+        <Header headerText={"See-n-Me"} />
       </View>
     );
   }
