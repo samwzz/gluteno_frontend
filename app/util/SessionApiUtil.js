@@ -15,7 +15,7 @@ export const signup = user => (
 );
 
 export const login =  user => (
-  fetch('https://jsonplaceholder.typicode.com/users', {
+  fetch('https://glutenbackend.herokuapp.com/restaurants', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
