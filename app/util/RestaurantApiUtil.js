@@ -1,5 +1,5 @@
 export const fetchRestaurants = () => (
-  fetch('https://jsonplaceholder.typicode.com/users', {
+  fetch('https://glutenbackend.herokuapp.com/restaurants', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

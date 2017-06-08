@@ -5,6 +5,7 @@ import { selectRestaurants } from '../reducers/selectors';
 import { View,
   Text,
   FlatList,
+  ListItem,
   StyleSheet
 } from 'react-native';
 
@@ -13,17 +14,20 @@ class RestaurantList extends Component {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchRestaurants();
   }
 
   render() {
+    console.log(this.props.restaurants);
     return (
-      <View style={styles.container}>
+      <View>
         <Text>Restaurant list!</Text>
         <FlatList
           data={this.props.restaurants}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+          renderItem={({item}) =>
+            <Text key={item.id}>{item.name}</Text>
+          }
         />
       </View>
     );

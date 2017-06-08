@@ -26,9 +26,11 @@ export const receiveRestaurantErrors = errors => ({
 });
 
 export const fetchRestaurants = () => dispatch => (
-  APIUtil.fetchRestaurants().then(restaurants => (
-    dispatch(receiveRestaurants(restaurants))
-  ))
+  APIUtil.fetchRestaurants()
+  .then((response) => response.json())
+  .then((responseJson) => {
+    dispatch(receiveRestaurants(responseJson));
+  })
 );
 
 export const fetchRestaurant = id => dispatch => (
