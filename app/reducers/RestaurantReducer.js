@@ -21,7 +21,7 @@ const defaultRestaurant = Object.freeze({
 const RestaurantReducer = (state = {}, action) => {
   Object.freeze(state);
   let nextState;
-
+  console.log(action);
   switch (action.type) {
     case RECEIVE_RESTAURANTS:
       return action.restaurants;
