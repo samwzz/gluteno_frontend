@@ -9,7 +9,7 @@ class RootContainer extends Component {
   render() {
     return(
       <View>
-        <Login />
+        <RestaurantList/>
       </View>
     );
   }
