@@ -20,7 +20,42 @@ class SignUp extends Component {
   }
 
   onSignupPressed() {
-
+      fetch('https://jsonplaceholder.typicode.com/users', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      body: JSON.stringify({
+          session: {
+            fname: this.state.fname,
+            lname: this.state.lname,
+            email: this.state.email,
+            username: this.state.username,
+            password: this.state.password
+          }
+        })
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        // if (responseJson.status >= 200 && responseJson.status < 300) {
+        //   //Handle signin
+        //   let accessToken = responseJson;
+        //   console.log(accessToken);
+        //   //On success we will store the access_token in the AsyncStorage
+        //   this.storeToken(accessToken);
+        //  //  this.redirect('home');
+        // } else {
+        //   //Handle error
+        //   let error = responseJson;
+        //   throw error;
+        // }
+      })
+      .catch((error) => {
+          this.setState({error: error});
+          console.log("error " + error);
+          // this.setState({showProgress: false});
+      });
   }
 
   render() {
