@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS } from '../actions/session_actions';
+import { RECEIVE_CURRENT_USER, RECEIVE_ERRORS } from '../actions/SessionActions';
 import { merge } from 'lodash';
 
 const _nullUser = Object.freeze({
