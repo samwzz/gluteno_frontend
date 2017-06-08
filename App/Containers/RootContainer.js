@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 
 import AuthForm from '../Components/AuthForm';
 import Login from '../Components/Login';
+import SignUp from '../Components/SignUp';
 
 class RootContainer extends Component {
   render() {
@@ -14,7 +15,7 @@ class RootContainer extends Component {
         <AuthForm />
 
         <Header headerText={"See-n-Me"} />
-        <Login />
+        <SignUp />
 
       </View>
     );

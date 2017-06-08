@@ -21,7 +21,7 @@ export default class RestaurantAdd extends Component {
   render() {
     <View>
       <Text style={styles.heading}>
-        See-n-Me Logo Here
+        See-n-Me Logo
       </Text>
 
       {/* Here we want AutoComplete TextFill
