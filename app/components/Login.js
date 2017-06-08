@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login } from '../actions/SessionActions';
+import { login, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -142,7 +142,12 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  login: (user) => dispatch(login({ user })),
+  receiveErrors: (err) => dispatch(receiveErrors(err))
+});
+
 export default connect(
   null,
-  mapDispatchToProps  
+  mapDispatchToProps
 )(Login);
