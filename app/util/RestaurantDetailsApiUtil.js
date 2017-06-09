@@ -1,5 +1,5 @@
 export const fetchRestaurantDetails = (restaurantId) => (
-  fetch('__RestaurantDetailsURL__', {
+  fetch('__RestaurantLikes__', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -8,16 +8,12 @@ export const fetchRestaurantDetails = (restaurantId) => (
   })
 );
 
-export const fetchRestaurantPhoto = (restaurantId) => (
-  $.ajax({
+export const fetchRestaurantMap = () => (
+  fetch('__RestaurantMap__', {
     method: 'GET',
-    url: `api/restaurants/${restaurantId}/photos`,
-    contentType: false,
-    processData: false,
-    restaurantId
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
   })
-);
-
-export const fetchMap = (restaurantId) => (
-
 );
