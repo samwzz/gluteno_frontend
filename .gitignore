@@ -24,7 +24,7 @@ project.xcworkspace
 
 # Cocoapods
 #
-/ios/Pods
+ios/Pods
 
 # Android/IntelliJ
 #
