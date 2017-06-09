@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import MapView from 'react-native-maps';
 
 const MapScreen = () => (
-  <View>
+  <View style={styles.container}>
     <MapView
       style={styles.map}
       initialRegion={{
@@ -16,13 +16,15 @@ const MapScreen = () => (
   </View>
 );
 
+const { height, width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20
+  },
   map: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
+    height: height,
+    width: width
   }
 });
 
