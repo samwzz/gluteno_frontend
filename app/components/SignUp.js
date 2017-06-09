@@ -28,8 +28,6 @@ class SignUp extends Component {
         },
       body: JSON.stringify({
           session: {
-            fname: this.state.fname,
-            lname: this.state.lname,
             email: this.state.email,
             username: this.state.username,
             password: this.state.password
@@ -64,16 +62,6 @@ class SignUp extends Component {
         <Text style={styles.heading}>
           SignUp for See-n-Me
         </Text>
-
-        <TextInput
-          onChangeText={ (text)=> this.setState({fname: text}) }
-          style={styles.input} placeholder="First Name">
-        </TextInput>
-
-        <TextInput
-          onChangeText={ (text)=> this.setState({lname: text}) }
-          style={styles.input} placeholder="Last Name">
-        </TextInput>
 
         <TextInput
           onChangeText={ (text)=> this.setState({email: text}) }
