@@ -15,17 +15,15 @@ export const signup = user => (
 );
 
 export const login =  user => (
-  fetch('https://glutenbackend.herokuapp.com/restaurants', {
+  fetch('https://glutenbackend.herokuapp.com/api/api-token-auth/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
   body: JSON.stringify({
-      session: {
-        email: user.email,
-        password: user.password,
-      }
+      username: user.email,
+      password: user.password,
     })
   })
   .then((response) => response.json())
