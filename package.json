@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "react": "^16.0.0-alpha.6",
+    "react": "16.0.0-alpha.6",
     "react-native": "0.44.2",
     "react-native-google-places-autocomplete": "^1.2.12",
     "react-native-maps": "^0.15.2",

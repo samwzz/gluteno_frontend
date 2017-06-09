@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+
+const { height, width } = Dimensions.get('window');
 
 const MapScreen = () => (
   <View style={styles.container}>
     <MapView
+
       style={styles.map}
       initialRegion={{
         latitude: 37.78825,
@@ -16,13 +19,13 @@ const MapScreen = () => (
   </View>
 );
 
-const { height, width } = Dimensions.get('window');
-
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20
+    ...StyleSheet.absoluteFillObject,
+    top: 20
   },
   map: {
+    ...StyleSheet.absoluteFillObject,
     height: height,
     width: width
   }
