@@ -10,7 +10,7 @@ class RootContainer extends Component {
   render() {
     return(
       <View>
-        <RestaurantList />
+        <MapScreen />
       </View>
     );
   }
