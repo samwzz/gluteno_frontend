@@ -15,7 +15,7 @@ export const signup = user => (
 );
 
 export const login =  user => (
-  fetch('https://glutenbackend.herokuapp.com/api/api-token-auth/', {
+  fetch('https://glutenbackend.herokuapp.com/api/login/', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -26,10 +26,10 @@ export const login =  user => (
       password: user.password,
     })
   })
-  .then((response) => response.json())
-  .then((responseJson) => {
-    console.log(responseJson);
-  })
+  // .then((response) => response.json())
+  // .then((responseJson) => {
+  //   console.log(responseJson);
+  // })
 //     if (responseJson.status >= 200 && responseJson.status < 300) {
 //       //Handle success
 //       let accessToken = responseJson;

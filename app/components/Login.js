@@ -9,7 +9,7 @@ import { View,
   StyleSheet
 } from 'react-native';
 
-const ACCESS_TOKEN = "access_token";
+// const ACCESS_TOKEN = "access_token";
 
 class Login extends Component {
   constructor() {
@@ -21,17 +21,17 @@ class Login extends Component {
     };
   }
 
-  storeToken(responseData){
-    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
-      if (err){
-        console.log("an error");
-        throw err;
-      }
-      console.log("success");
-    }).catch((err)=> {
-        console.log("error is: " + err);
-    });
-  }
+  // storeToken(responseData){
+  //   AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
+  //     if (err){
+  //       console.log("an error");
+  //       throw err;
+  //     }
+  //     console.log("success");
+  //   }).catch((err)=> {
+  //       console.log("error is: " + err);
+  //   });
+  // }
 
   onLoginPressed() {
     const { email, password } = this.state;
