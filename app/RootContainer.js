@@ -7,12 +7,13 @@ import RestaurantList from './components/RestaurantList';
 import MapScreen from './screens/MapScreen';
 import { MainNavigator } from './config/router';
 import RestaurantAddScreen from './screens/RestaurantAddScreen';
+import SomeComponent from './screens/Swipe';
 
 class RootContainer extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <RestaurantAddScreen />
+        <SomeComponent />
       </View>
     );
   }
