@@ -11,6 +11,7 @@ class RootContainer extends Component {
   render() {
     return(
       <View style={styles.container}>
+        <Header />
         <MainNavigator />
       </View>
     );

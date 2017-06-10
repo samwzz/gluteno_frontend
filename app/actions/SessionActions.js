@@ -52,14 +52,13 @@ export const login = user => dispatch => (
     // .then(formUser => dispatch(receiveCurrentUser(formUser))
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log(responseJson);
       if (responseJson.status >= 200 && responseJson.status < 300) {
         //Handle success
         let accessToken = responseJson.token;
         // console.log(accessToken);
         //On success we will store the access_token in the AsyncStorage
         storeToken(accessToken);
-        retrieveToken();
+
        //  this.redirect('home');
       } else {
         //Handle error
@@ -67,6 +66,7 @@ export const login = user => dispatch => (
         throw error;
       }
     })
+    .then(() => retrieveToken())
     .catch((error) => {
         dispatch(receiveErrors(error.responseJSON));
         console.log("error " + error);

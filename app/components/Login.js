@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, receiveErrors } from '../actions/SessionActions';
+import { login, logout, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -21,6 +21,11 @@ class Login extends Component {
     };
   }
 
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(result => this.setState({ result }));
+  }
+
   // storeToken(responseData){
   //   AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
   //     if (err){
@@ -36,6 +41,12 @@ class Login extends Component {
   onLoginPressed() {
     const { email, password } = this.state;
     this.props.login({ email, password });
+  }
+
+  onLogoutPressed() {
+    const { email, password } = this.state;
+    AsyncStorage.removeItem("access_token")
+    .then(result => this.setState({ result: "" }));
   }
 
   render() {
@@ -63,6 +74,12 @@ class Login extends Component {
         <Text style={styles.error}>
           {this.state.error}
         </Text>
+        <Text>{this.state.result}</Text>
+        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+          <Text style={styles.buttonText}>
+            Logout
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -112,6 +129,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (user) => dispatch(login(user)),
+  logout: () => dispatch(logout()),
   receiveErrors: (err) => dispatch(receiveErrors(err))
 });
 
