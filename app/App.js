@@ -10,9 +10,7 @@ class App extends Component {
 
     return(
       <Provider store={store}>
-        <View style={{ flex: 1 }}>
           <RootContainer />
-        </View>
       </Provider>
     );
   }
