@@ -8,6 +8,7 @@ import { View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
+import * as APIUtil from '../util/SessionApiUtil';
 
 const ACCESS_TOKEN = "access_token";
 
@@ -17,13 +18,14 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      token: "",
       error: ""
     };
   }
 
   componentDidUpdate() {
     AsyncStorage.getItem("access_token")
-    .then(result => this.setState({ result }));
+    .then(token => this.setState({ token }));
   }
 
   storeToken(responseData){
@@ -69,7 +71,7 @@ class Login extends Component {
       })
       .then(() => this.retrieveToken())
       .catch((error) => {
-
+          this.setState({error: error});
           console.log("error " + error);
           // this.setState({showProgress: false});
       }
@@ -109,10 +111,8 @@ class Login extends Component {
           </Text>
         </TouchableHighlight>
 
-        <Text style={styles.error}>
-          {this.state.error}
-        </Text>
-        <Text>{this.state.result}</Text>
+
+        <Text>{this.state.token}</Text>
         <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
             Logout

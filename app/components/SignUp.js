@@ -7,53 +7,76 @@ import { View,
   StyleSheet
 } from 'react-native';
 
+const ACCESS_TOKEN = "access_token";
+
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      fname: "",
-      lname: "",
       email: "",
       username: "",
       password: ""
     };
   }
 
+  storeToken(responseData){
+    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
+      if (err){
+        console.log("an error");
+        throw err;
+      }
+      console.log("success");
+    }).catch((err)=> {
+        console.log("error is: " + err);
+    });
+  }
+
   onSignupPressed() {
-      fetch('https://jsonplaceholder.typicode.com/users', {
+      fetch('https://glutenbackend.herokuapp.com/api/signup/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
       body: JSON.stringify({
-          session: {
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password
-          }
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password
         })
       })
       .then((response) => response.json())
       .then((responseJson) => {
-        // if (responseJson.status >= 200 && responseJson.status < 300) {
-        //   //Handle signin
-        //   let accessToken = responseJson;
-        //   console.log(accessToken);
-        //   //On success we will store the access_token in the AsyncStorage
-        //   this.storeToken(accessToken);
-        //  //  this.redirect('home');
-        // } else {
-        //   //Handle error
-        //   let error = responseJson;
-        //   throw error;
-        // }
+        if (responseJson.status >= 200 && responseJson.status < 300) {
+          //Handle signin
+          let accessToken = responseJson.token;
+          // console.log(accessToken);
+          console.log("hi");
+          //On success we will store the access_token in the AsyncStorage
+          this.storeToken(accessToken);
+          //  this.redirect('home');
+        } else {
+          //Handle error
+          let error = responseJson;
+          throw error;
+        }
       })
       .catch((error) => {
           this.setState({error: error});
-          console.log("error " + error);
+          console.log("error");
+          console.log(error);
           // this.setState({showProgress: false});
       });
+  }
+
+  onLogoutPressed() {
+    const { email, password } = this.state;
+    AsyncStorage.removeItem("access_token")
+    .then(result => this.setState({ result: "" }));
+  }
+
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(token => this.setState({ token }));
   }
 
   render() {
@@ -82,13 +105,17 @@ class SignUp extends Component {
 
         <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
-            Login
+            Sign up
           </Text>
         </TouchableHighlight>
 
-        <Text style={styles.error}>
-          {this.state.error}
-        </Text>
+        <Text>{this.state.token}</Text>
+
+        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+          <Text style={styles.buttonText}>
+            Logout
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
