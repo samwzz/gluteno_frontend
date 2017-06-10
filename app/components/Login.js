@@ -8,7 +8,6 @@ import { View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
-import * as APIUtil from '../util/SessionApiUtil';
 
 const ACCESS_TOKEN = "access_token";
 
@@ -40,7 +39,7 @@ class Login extends Component {
     });
   }
 
-  login() {
+  onLoginPressed() {
     fetch('https://glutenbackend.herokuapp.com/api/login/', {
       method: 'POST',
       headers: {
@@ -56,15 +55,15 @@ class Login extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.status >= 200 && responseJson.status < 300) {
-          //Handle success
+          // Handle success
           let accessToken = responseJson.token;
           // console.log(accessToken);
-          //On success we will store the access_token in the AsyncStorage
+          // On success we will store the access_token in the AsyncStorage
           this.storeToken(accessToken);
 
          //  this.redirect('home');
         } else {
-          //Handle error
+          // Handle error
           let error = responseJson;
           throw error;
         }
@@ -76,11 +75,6 @@ class Login extends Component {
           // this.setState({showProgress: false});
       }
     );
-  }
-
-  onLoginPressed() {
-    const { email, password } = this.state;
-    this.login({ email, password });
   }
 
   onLogoutPressed() {

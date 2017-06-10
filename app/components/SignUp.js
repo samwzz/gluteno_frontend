@@ -15,7 +15,8 @@ class SignUp extends Component {
     this.state = {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      errors: {}
     };
   }
 
@@ -47,24 +48,22 @@ class SignUp extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         if (responseJson.status >= 200 && responseJson.status < 300) {
-          //Handle signin
+          // Handle signin
           let accessToken = responseJson.token;
           // console.log(accessToken);
           console.log("hi");
-          //On success we will store the access_token in the AsyncStorage
+          // On success we will store the access_token in the AsyncStorage
           this.storeToken(accessToken);
           //  this.redirect('home');
         } else {
-          //Handle error
+          // Handle error
           let error = responseJson;
           throw error;
         }
       })
-      .catch((error) => {
-          this.setState({error: error});
-          console.log("error");
-          console.log(error);
-          // this.setState({showProgress: false});
+      .catch((errors) => {
+        this.setState({ errors });
+        console.log(this.state.errors);
       });
   }
 
@@ -80,6 +79,7 @@ class SignUp extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
@@ -91,10 +91,14 @@ class SignUp extends Component {
           style={styles.input} placeholder="Email">
         </TextInput>
 
+        <Text style={styles.error}> { errors.email } </Text>
+
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
+
+        <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
           onChangeText={ (text)=> this.setState({password: text}) }
@@ -102,6 +106,8 @@ class SignUp extends Component {
           placeholder="Password"
           secureTextEntry={true}>
         </TextInput>
+
+        <Text style={styles.error}> { errors.password } </Text>
 
         <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
