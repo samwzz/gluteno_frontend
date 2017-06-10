@@ -9,7 +9,7 @@ import { View,
   StyleSheet
 } from 'react-native';
 
-// const ACCESS_TOKEN = "access_token";
+const ACCESS_TOKEN = "access_token";
 
 class Login extends Component {
   constructor() {
@@ -26,21 +26,59 @@ class Login extends Component {
     .then(result => this.setState({ result }));
   }
 
-  // storeToken(responseData){
-  //   AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
-  //     if (err){
-  //       console.log("an error");
-  //       throw err;
-  //     }
-  //     console.log("success");
-  //   }).catch((err)=> {
-  //       console.log("error is: " + err);
-  //   });
-  // }
+  storeToken(responseData){
+    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
+      if (err){
+        console.log("an error");
+        throw err;
+      }
+      console.log("success");
+    }).catch((err)=> {
+        console.log("error is: " + err);
+    });
+  }
+
+  login() {
+    fetch('https://glutenbackend.herokuapp.com/api/login/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    body: JSON.stringify({
+        username: this.state.email,
+        password: this.state.password,
+      })
+    })
+      // .then(formUser => dispatch(receiveCurrentUser(formUser))
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson.status >= 200 && responseJson.status < 300) {
+          //Handle success
+          let accessToken = responseJson.token;
+          // console.log(accessToken);
+          //On success we will store the access_token in the AsyncStorage
+          this.storeToken(accessToken);
+
+         //  this.redirect('home');
+        } else {
+          //Handle error
+          let error = responseJson;
+          throw error;
+        }
+      })
+      .then(() => this.retrieveToken())
+      .catch((error) => {
+
+          console.log("error " + error);
+          // this.setState({showProgress: false});
+      }
+    );
+  }
 
   onLoginPressed() {
     const { email, password } = this.state;
-    this.props.login({ email, password });
+    this.login({ email, password });
   }
 
   onLogoutPressed() {
@@ -127,13 +165,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user)),
-  logout: () => dispatch(logout()),
-  receiveErrors: (err) => dispatch(receiveErrors(err))
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
+export default Login;
