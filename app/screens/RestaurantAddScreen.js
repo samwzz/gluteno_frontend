@@ -24,6 +24,8 @@ class RestaurantAddScreen extends Component {
 
     return (
       <View>
+        <Text> Add Restaurant </Text>
+        <View>
         <GooglePlacesAutocomplete
           placeholder='Search'
           minLength={2} // minimum length of text to search
@@ -53,7 +55,8 @@ class RestaurantAddScreen extends Component {
               color: '#1faadb',
             },
             textInputContainer: {
-              backgroundColor: 'rgba(0,0,0,0)'
+              backgroundColor: 'rgba(0,0,0,0)',
+              color: 'red',
             },
             listView: {
               height: 200,
@@ -81,6 +84,12 @@ class RestaurantAddScreen extends Component {
 
           debounce={200}
         />
+      </View>
+
+      <View>
+        <Text> Testing </Text>
+      </View>
+
       </View>
     );
   }
