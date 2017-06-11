@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createRestaurant } from '../actions/RestaurantActions';
 import { View, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Button from 'react-native-button';
@@ -19,10 +21,9 @@ class RestaurantAddScreen extends Component {
   _handlePress() {
     console.log('Pressed!');
     console.log(this.state);
-  }
 
-  onRestaurantAddPress() {
-
+    const { name, place_id, lat, lng, address } = this.state;
+    this.props.createRestaurant( { name, place_id, lat, lng, address } );
   }
 
   render() {
@@ -123,10 +124,13 @@ class RestaurantAddScreen extends Component {
       </View>
     );
   }
-
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  createRestaurant: (data) => dispatch(createRestaurant(data))
+});
 
-
-
-export default RestaurantAddScreen;
+export default connect(
+  null,
+  mapDispatchToProps
+)(RestaurantAddScreen);
