@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import Button from 'react-native-button';
 
 class RestaurantAddScreen extends Component {
   constructor() {
@@ -9,8 +10,15 @@ class RestaurantAddScreen extends Component {
       name: "",
       place_id: "",
       lat: "",
-      lng: ""
+      lng: "",
+      address: "",
+      phone: ""
     };
+  }
+
+  _handlePress() {
+    console.log('Pressed!');
+    console.log(this.state);
   }
 
   onRestaurantAddPress() {
@@ -23,7 +31,14 @@ class RestaurantAddScreen extends Component {
     const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
 
     return (
-      <View>
+      <View style={{ flex: 1 }}>
+        <View style={{
+            paddingTop: 20
+          }}>
+          <Text> Add Restaurant </Text>
+        </View>
+
+        <View style={{ flex: 1, height: 200 }}>
         <GooglePlacesAutocomplete
           placeholder='Search'
           minLength={2} // minimum length of text to search
@@ -33,8 +48,12 @@ class RestaurantAddScreen extends Component {
           fetchDetails={true}
           renderDescription={(row) => row.description} // custom description render
           onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-            console.log(data);
-            console.log(details);
+            this.setState({name: details.name,
+                           place_id: data.place_id,
+                           lat: details.geometry.location.lat,
+                           lng: details.geometry.location.lng,
+                           address: details.formatted_address,
+                           phone: details.formatted_phone_number});
           }}
           getDefaultValue={() => {
             return ''; // text input default value
@@ -43,7 +62,7 @@ class RestaurantAddScreen extends Component {
             // available options: https://developers.google.com/places/web-service/autocomplete
             key: 'AIzaSyBDwGj9-ZQ1ID90JRABgmbmQl0AJCnrU70',
             language: 'en', // language of the results
-            types: '(cities)', // default: 'geocode'
+            types: 'establishment', // default: 'geocode'
           }}
           styles={{
             description: {
@@ -53,12 +72,13 @@ class RestaurantAddScreen extends Component {
               color: '#1faadb',
             },
             textInputContainer: {
-              backgroundColor: 'rgba(0,0,0,0)'
+              backgroundColor: 'black',
             },
             listView: {
               height: 200,
               width: 200,
-              position: 'absolute',
+              backgroundColor: 'red',
+              /*position: 'absolute',*/
             },
           }}
 
@@ -81,6 +101,25 @@ class RestaurantAddScreen extends Component {
 
           debounce={200}
         />
+      </View>
+
+      <View style={{
+          flex: 1,
+          backgroundColor: 'lightblue',
+          alignItems: 'center',
+        }}>
+        <Text>{ this.state.name }</Text>
+        <Text>{ this.state.address }</Text>
+        <Text>{ this.state.phone }</Text>
+      </View>
+
+      <Button
+        style={{fontSize: 20, color: 'green'}}
+        styleDisabled={{color: 'red'}}
+        onPress={() => this._handlePress()}>
+        Press Me!
+      </Button>
+
       </View>
     );
   }
