@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signup, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -7,56 +9,37 @@ import { View,
   StyleSheet
 } from 'react-native';
 
+const ACCESS_TOKEN = "access_token";
+
 class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      fname: "",
-      lname: "",
       email: "",
       username: "",
-      password: ""
+      password: "",
+      token: ""
     };
   }
 
   onSignupPressed() {
-      fetch('https://jsonplaceholder.typicode.com/users', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-      body: JSON.stringify({
-          session: {
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password
-          }
-        })
-      })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        // if (responseJson.status >= 200 && responseJson.status < 300) {
-        //   //Handle signin
-        //   let accessToken = responseJson;
-        //   console.log(accessToken);
-        //   //On success we will store the access_token in the AsyncStorage
-        //   this.storeToken(accessToken);
-        //  //  this.redirect('home');
-        // } else {
-        //   //Handle error
-        //   let error = responseJson;
-        //   throw error;
-        // }
-      })
-      .catch((error) => {
-          this.setState({error: error});
-          console.log("error " + error);
-          // this.setState({showProgress: false});
-      });
+    const { email, username, password } = this.state;
+    this.props.signup({ email, username, password });
+  }
+
+  onLogoutPressed() {
+    const { email, password } = this.state;
+    AsyncStorage.removeItem("access_token")
+    .then(result => this.setState({ result: "" }));
+  }
+
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(token => this.setState({ token }));
   }
 
   render() {
+    const { errors } = this.props;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
@@ -68,10 +51,14 @@ class SignUp extends Component {
           style={styles.input} placeholder="Email">
         </TextInput>
 
+        <Text style={styles.error}> { errors.email } </Text>
+
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
+
+        <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
           onChangeText={ (text)=> this.setState({password: text}) }
@@ -80,21 +67,25 @@ class SignUp extends Component {
           secureTextEntry={true}>
         </TextInput>
 
+        <Text style={styles.error}> { errors.password } </Text>
+
         <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
-            Login
+            Sign up
           </Text>
         </TouchableHighlight>
 
-        <Text style={styles.error}>
-          {this.state.error}
-        </Text>
+        <Text>{this.state.token}</Text>
+
+        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+          <Text style={styles.buttonText}>
+            Logout
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
 }
-
-// Pass in props and dispatches here
 
 // Styles
 const styles = StyleSheet.create({
@@ -139,5 +130,17 @@ const styles = StyleSheet.create({
   }
 });
 
+// Map state and dispatch to props
+const mapStateToProps = ({ session }) => ({
+  currentUser: session.currentUser,
+  errors: session.errors
+});
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  signup: (user) => dispatch(signup(user))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUp);

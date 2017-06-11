@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, receiveErrors } from '../actions/SessionActions';
+import { login, logout, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -9,60 +9,67 @@ import { View,
   StyleSheet
 } from 'react-native';
 
-// const ACCESS_TOKEN = "access_token";
+const ACCESS_TOKEN = "access_token";
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
+      username: "",
       password: "",
-      error: ""
+      token: ""
     };
   }
 
-  // storeToken(responseData){
-  //   AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
-  //     if (err){
-  //       console.log("an error");
-  //       throw err;
-  //     }
-  //     console.log("success");
-  //   }).catch((err)=> {
-  //       console.log("error is: " + err);
-  //   });
-  // }
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(token => this.setState({ token }));
+  }
 
   onLoginPressed() {
+    const { username, password } = this.state;
+    this.props.login({ username, password });
+  }
+
+  onLogoutPressed() {
     const { email, password } = this.state;
-    this.props.login({ email, password });
+    AsyncStorage.removeItem("access_token")
+    .then(result => this.setState({ result: "" }));
   }
 
   render() {
+    const { errors } = this.props;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
           Login to See-n-Me
         </Text>
         <TextInput
-          onChangeText={ (text)=> this.setState({email: text}) }
-          style={styles.input} placeholder="Email">
+          onChangeText={ (text)=> this.setState({username: text}) }
+          style={styles.input} placeholder="Username">
         </TextInput>
+        <Text style={styles.error}> { errors.username } </Text>
+
         <TextInput
           onChangeText={ (text)=> this.setState({password: text}) }
           style={styles.input}
           placeholder="Password"
           secureTextEntry={true}>
         </TextInput>
+        <Text style={styles.error}> { errors.password } </Text>
+
         <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
             Login
           </Text>
         </TouchableHighlight>
 
-        <Text style={styles.error}>
-          {this.state.error}
-        </Text>
+        <Text>{this.state.token}</Text>
+        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+          <Text style={styles.buttonText}>
+            Logout
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -110,12 +117,17 @@ const styles = StyleSheet.create({
   }
 });
 
+// Map state and dispatch to props
+const mapStateToProps = ({ session }) => ({
+  currentUser: session.currentUser,
+  errors: session.errors
+});
+
 const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user)),
-  receiveErrors: (err) => dispatch(receiveErrors(err))
+  login: (user) => dispatch(login(user))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);
