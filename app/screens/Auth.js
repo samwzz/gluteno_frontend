@@ -17,10 +17,10 @@ class Auth extends Component {
   }
 
   checkAuth() {
-    AsyncStorage.getItem("access_token")
+    AsyncStorage.getItem('access_token')
     .then(token => {
       if (token) {
-        this.props.navigation.navigate('map');
+        this.props.navigation.navigate('Map');
       }
     });
   }

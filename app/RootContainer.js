@@ -5,7 +5,7 @@ import AuthForm from './components/AuthForm';
 import Login from './components/Login';
 import RestaurantList from './components/RestaurantList';
 import Map from './screens/Map';
-import { MainNavigator } from './config/router';
+import { MainNavigator, Root } from './config/router';
 import RestaurantAdd from './screens/RestaurantAdd';
 import SomeComponent from './screens/Swipe';
 
@@ -13,7 +13,7 @@ class RootContainer extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <MainNavigator />
+        <Root />
       </View>
     );
   }

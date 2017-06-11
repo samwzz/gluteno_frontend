@@ -4,24 +4,25 @@ import { Icon } from 'react-native-elements';
 import Auth from '../screens/Auth';
 import Welcome from '../screens/Welcome';
 import Map from '../screens/Map';
-import Deck from '../screens/Deck';
+import RestaurantList from '../screens/RestaurantList';
 import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
+// import Settings from '../screens/Settings';
 
 export const MainNavigator = TabNavigator({
-  welcome: {
+  Welcome: {
     screen: Welcome
   },
-  auth: {
+  Auth: {
     screen: Auth
   },
-  main: {
+  Main: {
     screen: TabNavigator({
       map: {
         screen: Map
       },
       deck: {
-        screen: Deck
+        screen: RestaurantList
       },
       restaurant: {
         screen: StackNavigator({
@@ -46,21 +47,56 @@ export const MainNavigator = TabNavigator({
   lazy: true
 });
 
-export const Tabs = TabNavigator({
-  deck: {
-    screen: Deck,
+export const RestaurantsStack = StackNavigator({
+  RestaurantList: {
+    screen: RestaurantList,
     navigationOptions: {
-      tabBarLabel: "Deck",
-      tabBarIcon: ({ tintColor }) =>
-        <Icon name="list" size={35} color={tintColor} />,
+      title: 'Restaurants'
     }
   },
-  map: {
-    screen: Map,
+  RestaurantDetail: {
+    screen: RestaurantDetail,
     navigationOptions: {
-      tabBarLabel: "Map",
-      tabBarIcon: ({ tintColor }) =>
-        <Icon name="map" size={35} color={tintColor} />,
+      title: 'Details'
     }
   }
+});
+
+export const Tabs = TabNavigator({
+  RestaurantList: {
+    screen: RestaurantsStack,
+    navigationOptions: {
+      tabBarLabel: 'Restaurants',
+      // tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
+    }
+  },
+  Map: {
+    screen: Map,
+    navigationOptions: {
+      tabBarLabel: 'Map',
+      // tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />,
+    }
+  }
+});
+
+// export const SettingsStack = StackNavigator({
+//   Settings: {
+//     screen: Settings,
+//     navigationOptions: {
+//       title: 'Settings'
+//     }
+//   }
+// });
+
+
+export const Root = StackNavigator({
+  Tabs: {
+    screen: Tabs,
+  },
+  // Settings: {
+  //   Screen: SettingsStack
+  // }
+}, {
+  mode: 'modal',
+  headerMode: 'none'
 });

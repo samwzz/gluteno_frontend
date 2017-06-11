@@ -16,13 +16,13 @@ class Welcome extends Component {
     .then(token => {
       console.log(token);
       if (token) {
-        this.props.navigation.navigate('map');
+        this.props.navigation.navigate('Map');
       }
     });
   }
 
   onSlidesComplete() {
-    this.props.navigation.navigate('auth');
+    this.props.navigation.navigate('Auth');
   }
 
   render() {
