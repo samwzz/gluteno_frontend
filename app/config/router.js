@@ -77,7 +77,15 @@ export const Tabs = TabNavigator({
       tabBarLabel: 'Map',
       tabBarIcon: ({ tintColor }) => <Icon name="map" size={35} color={tintColor} />,
     }
+  },
+  RestaurantAdd: {
+    screen: RestaurantAdd,
+    navigationOptions: {
+      tabBarLabel: 'Add',
+      tabBarIcon: ({ tintColor }) => <Icon name="map" size={35} color={tintColor} />,
+    }
   }
+
 });
 
 // export const SettingsStack = StackNavigator({
