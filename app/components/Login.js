@@ -29,7 +29,6 @@ class Login extends Component {
   onLoginPressed() {
     const { username, password } = this.state;
     this.props.login({ username, password });
-    console.log(this.props.currentUser);
   }
 
   onLogoutPressed() {
@@ -58,6 +57,7 @@ class Login extends Component {
           secureTextEntry={true}>
         </TextInput>
         <Text style={styles.error}> { errors.password } </Text>
+        <Text style={styles.error}> { errors.non_field_errors } </Text>
 
         <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>

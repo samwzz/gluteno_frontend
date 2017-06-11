@@ -64,8 +64,8 @@ export const login = user => dispatch => (
        //  this.redirect('home');
       } else {
         //Handle error
-        console.log("error");
         let error = responseJson;
+        console.log(error);
         throw error;
       }
     })

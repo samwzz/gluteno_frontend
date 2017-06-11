@@ -7,7 +7,8 @@ const _nullUser = Object.freeze({
     {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      non_field_errors: ""
     }
 });
 
