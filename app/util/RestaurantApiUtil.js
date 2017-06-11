@@ -1,11 +1,18 @@
+import { AsyncStorage } from 'react-native';
+const ACCESS_TOKEN = "access_token";
+
 export const fetchRestaurants = () => (
-  fetch('https://glutenbackend.herokuapp.com/restaurants', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  })
+  AsyncStorage.getItem(ACCESS_TOKEN)
+  .then(token =>
+    fetch('https://glutenbackend.herokuapp.com/api/restaurants/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + token
+      }
+    })
+  )
 );
 
 export const fetchRestaurant = id => (
