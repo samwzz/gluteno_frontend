@@ -38,4 +38,9 @@ export const MainNavigator = TabNavigator({
       }
     })
   }
+}, {
+  navigationOptions: {
+    // tabBarVisible: false
+  },
+  lazy: true
 });
