@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Header from './components/common/Header';
 import AuthForm from './components/AuthForm';
 import Login from './components/Login';
-import RestaurantList from './components/RestaurantList';
+import RestaurantList from './screens/RestaurantList';
 import Map from './screens/Map';
 import { MainNavigator, Root } from './config/router';
 import RestaurantAdd from './screens/RestaurantAdd';
