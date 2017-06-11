@@ -41,10 +41,10 @@ export const fetchRestaurant = id => dispatch => (
 
 export const createRestaurant = formRestaurant => dispatch => (
   APIUtil.createRestaurant(formRestaurant)
-    .then(restaurant => dispatch(receiveRestaurant(restaurant)))
-    .fail(err => dispatch(receiveRestaurantErrors(err.responseJSON))
-  )
-);
+  .then((response) => response.json())
+  .then((responseJson) => dispatch(receiveRestaurant(responseJson))
+));
+
 
 export const updateRestaurant = (formRestaurant, id) => dispatch => (
   APIUtil.updateRestaurant(formRestaurant, id)

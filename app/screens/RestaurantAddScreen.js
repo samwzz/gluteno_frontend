@@ -20,10 +20,12 @@ class RestaurantAddScreen extends Component {
 
   _handlePress() {
     console.log('Pressed!');
-    console.log(this.state);
+    // console.log(this.state);
 
-    const { name, place_id, lat, lng, address } = this.state;
-    this.props.createRestaurant( { name, place_id, lat, lng, address } );
+    const { name, place_id, lat, lng, address, phone } = this.state;
+    this.props.createRestaurant( { name, place_id, lat, lng, address, phone } );
+
+    // console.log(this.props.restaurants);
   }
 
   render() {
@@ -126,11 +128,15 @@ class RestaurantAddScreen extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  restaurants:  state.restaurants
+});
+
 const mapDispatchToProps = (dispatch) => ({
   createRestaurant: (data) => dispatch(createRestaurant(data))
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RestaurantAddScreen);
