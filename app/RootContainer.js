@@ -8,12 +8,13 @@ import MapScreen from './screens/MapScreen';
 import { MainNavigator } from './config/router';
 import RestaurantAddScreen from './screens/RestaurantAddScreen';
 import SomeComponent from './screens/Swipe';
+import RestaurantShowScreen from './screens/RestaurantShowScreen';
 
 class RootContainer extends Component {
   render() {
     return(
       <View style={styles.container}>
-        <SomeComponent />
+        <RestaurantShowScreen/>
       </View>
     );
   }
