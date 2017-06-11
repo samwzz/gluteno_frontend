@@ -15,10 +15,9 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
+      username: "",
       password: "",
-      token: "",
-      error: ""
+      token: ""
     };
   }
 
@@ -27,54 +26,9 @@ class Login extends Component {
     .then(token => this.setState({ token }));
   }
 
-  storeToken(responseData){
-    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
-      if (err){
-        console.log("an error");
-        throw err;
-      }
-      console.log("success");
-    }).catch((err)=> {
-        console.log("error is: " + err);
-    });
-  }
-
   onLoginPressed() {
-    fetch('https://glutenbackend.herokuapp.com/api/login/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    body: JSON.stringify({
-        username: this.state.email,
-        password: this.state.password,
-      })
-    })
-      // .then(formUser => dispatch(receiveCurrentUser(formUser))
-      .then((response) => response.json())
-      .then((responseJson) => {
-        if (responseJson.status >= 200 && responseJson.status < 300) {
-          // Handle success
-          let accessToken = responseJson.token;
-          // console.log(accessToken);
-          // On success we will store the access_token in the AsyncStorage
-          this.storeToken(accessToken);
-
-         //  this.redirect('home');
-        } else {
-          // Handle error
-          let error = responseJson;
-          throw error;
-        }
-      })
-      .then(() => this.retrieveToken())
-      .catch((error) => {
-          this.setState({error: error});
-          console.log("error " + error);
-          // this.setState({showProgress: false});
-      }
-    );
+    const { username, password } = this.state;
+    this.props.login({ username, password });
   }
 
   onLogoutPressed() {
@@ -84,27 +38,31 @@ class Login extends Component {
   }
 
   render() {
+    const { errors } = this.props;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
           Login to See-n-Me
         </Text>
         <TextInput
-          onChangeText={ (text)=> this.setState({email: text}) }
-          style={styles.input} placeholder="Email">
+          onChangeText={ (text)=> this.setState({username: text}) }
+          style={styles.input} placeholder="Username">
         </TextInput>
+        <Text style={styles.error}> { errors.username } </Text>
+
         <TextInput
           onChangeText={ (text)=> this.setState({password: text}) }
           style={styles.input}
           placeholder="Password"
           secureTextEntry={true}>
         </TextInput>
+        <Text style={styles.error}> { errors.password } </Text>
+
         <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
             Login
           </Text>
         </TouchableHighlight>
-
 
         <Text>{this.state.token}</Text>
         <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
@@ -159,4 +117,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+// Map state and dispatch to props
+const mapStateToProps = ({ session }) => ({
+  currentUser: session.currentUser,
+  errors: session.errors
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (user) => dispatch(login(user))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
