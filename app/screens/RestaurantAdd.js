@@ -14,7 +14,7 @@ class RestaurantAdd extends Component {
       lat: "",
       lng: "",
       address: "",
-      phone: ""
+      phone_number: ""
     };
   }
 
@@ -22,8 +22,8 @@ class RestaurantAdd extends Component {
     console.log('Pressed!');
     // console.log(this.state);
 
-    const { name, place_id, lat, lng, address, phone } = this.state;
-    this.props.createRestaurant( { name, place_id, lat, lng, address, phone } );
+    const { name, place_id, lat, lng, address, phone_number } = this.state;
+    this.props.createRestaurant( { name, place_id, lat, lng, address, phone_number } );
 
     // console.log(this.props.restaurants);
   }
@@ -32,7 +32,7 @@ class RestaurantAdd extends Component {
 
     const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
     const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
-
+    console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <View style={{
@@ -56,7 +56,7 @@ class RestaurantAdd extends Component {
                            lat: details.geometry.location.lat,
                            lng: details.geometry.location.lng,
                            address: details.formatted_address,
-                           phone: details.formatted_phone_number});
+                           phone_number: details.formatted_phone_number});
           }}
           getDefaultValue={() => {
             return ''; // text input default value
@@ -113,7 +113,7 @@ class RestaurantAdd extends Component {
         }}>
         <Text>{ this.state.name }</Text>
         <Text>{ this.state.address }</Text>
-        <Text>{ this.state.phone }</Text>
+        <Text>{ this.state.phone_number }</Text>
       </View>
 
       <Button

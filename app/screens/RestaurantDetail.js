@@ -18,7 +18,7 @@ class RestaurantDetail extends Component {
 
   render() {
     console.log(this.props.navigation.state.params);
-    const { name, address, phone, lat, lng } = this.props.navigation.state.params;
+    const { name, address, phone_number, lat, lng } = this.props.navigation.state.params;
 
     return(
       <Card>
@@ -34,7 +34,7 @@ class RestaurantDetail extends Component {
           <Text>{ address }</Text>
         </CardSection>
         <CardSection>
-          <Text>{ phone }</Text>
+          <Text>{ phone_number }</Text>
         </CardSection>
 
         <CardSection>

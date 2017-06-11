@@ -81,8 +81,8 @@ export const Tabs = TabNavigator({
   RestaurantAdd: {
     screen: RestaurantAdd,
     navigationOptions: {
-      tabBarLabel: 'Add',
-      tabBarIcon: ({ tintColor }) => <Icon name="map" size={35} color={tintColor} />,
+      tabBarLabel: 'Add location',
+      tabBarIcon: ({ tintColor }) => <Icon name="add-location" size={35} color={tintColor} />,
     }
   }
 
