@@ -4,7 +4,7 @@ import { Icon } from 'react-native-elements';
 import Auth from '../screens/Auth';
 import Welcome from '../screens/Welcome';
 import Map from '../screens/Map';
-import RestaurantList from '../screens/RestaurantList';
+import Restaurants from '../screens/Restaurants';
 import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
 // import Settings from '../screens/Settings';
@@ -22,7 +22,7 @@ export const MainNavigator = TabNavigator({
         screen: Map
       },
       deck: {
-        screen: RestaurantList
+        screen: Restaurants
       },
       restaurant: {
         screen: StackNavigator({
@@ -48,8 +48,8 @@ export const MainNavigator = TabNavigator({
 });
 
 export const RestaurantsStack = StackNavigator({
-  RestaurantList: {
-    screen: RestaurantList,
+  Restaurants: {
+    screen: Restaurants,
     navigationOptions: {
       title: 'Restaurants'
     }
@@ -63,7 +63,7 @@ export const RestaurantsStack = StackNavigator({
 });
 
 export const Tabs = TabNavigator({
-  RestaurantList: {
+  Restaurants: {
     screen: RestaurantsStack,
     navigationOptions: {
       tabBarLabel: 'Restaurants',
