@@ -1,5 +1,5 @@
-export const fetchRestaurantDetails = (restaurantId) => (
-  fetch('__RestaurantLikes__', {
+export const fetchRestaurantDetails = (id) => (
+  fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

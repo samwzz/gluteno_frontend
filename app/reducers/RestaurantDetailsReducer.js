@@ -1,14 +1,12 @@
 import { merge } from 'lodash';
 import { RECEIVE_RESTAURANT_DETAILS,
          RECEIVE_RESTAURANT_MAP
-       } from '../actions/RestaurantDetailActions';
+       } from '../actions/RestaurantDetailsActions';
 
 const defaultRestaurantDetails = Object.freeze({
-  0: {
     address: "",
     phone: "",
     hours: ""
-  }
 });
 
 const RestaurantDetailsReducer = (state = {}, action) => {

@@ -9,7 +9,7 @@ class App extends Component {
     const store = configureStore();
 
     return(
-      <Provider store={store}>
+      <Provider store={ store }>
           <RootContainer />
       </Provider>
     );
