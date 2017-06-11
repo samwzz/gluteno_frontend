@@ -6,6 +6,17 @@ import SignUp from '../components/SignUp';
 
 class AuthScreen extends Component {
   componentWillMount() {
+    this.checkAuth();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.currentUser);
+    if (nextProps.currentUser) {
+      this.checkAuth();
+    }
+  }
+
+  checkAuth() {
     AsyncStorage.getItem("access_token")
     .then(token => {
       if (token) {
@@ -13,7 +24,6 @@ class AuthScreen extends Component {
       }
     });
   }
-
 
   render() {
     return (

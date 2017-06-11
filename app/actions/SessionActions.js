@@ -56,11 +56,11 @@ export const login = user => dispatch => (
     .then((responseJson) => {
       if (responseJson.status >= 200 && responseJson.status < 300) {
         //Handle success
-        let accessToken = responseJson.token;
+        const { token, userId, username } = responseJson;
         // console.log(accessToken);
         //On success we will store the access_token in the AsyncStorage
-        storeToken(accessToken);
-        dispatch(receiveCurrentUser(responseJson.user));
+        storeToken(token);
+        dispatch(receiveCurrentUser({ userId, username }));
        //  this.redirect('home');
       } else {
         //Handle error

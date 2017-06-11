@@ -29,6 +29,7 @@ class Login extends Component {
   onLoginPressed() {
     const { username, password } = this.state;
     this.props.login({ username, password });
+    console.log(this.props.currentUser);
   }
 
   onLogoutPressed() {
