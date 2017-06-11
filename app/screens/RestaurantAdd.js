@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Button from 'react-native-button';
 
-class RestaurantAddScreen extends Component {
+class RestaurantAdd extends Component {
   constructor() {
     super();
     this.state = {
@@ -133,4 +133,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(RestaurantAddScreen);
+)(RestaurantAdd);

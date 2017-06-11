@@ -4,9 +4,9 @@ import Header from './components/common/Header';
 import AuthForm from './components/AuthForm';
 import Login from './components/Login';
 import RestaurantList from './components/RestaurantList';
-import MapScreen from './screens/MapScreen';
+import Map from './screens/Map';
 import { MainNavigator } from './config/router';
-import RestaurantAddScreen from './screens/RestaurantAddScreen';
+import RestaurantAdd from './screens/RestaurantAdd';
 import SomeComponent from './screens/Swipe';
 
 class RootContainer extends Component {
