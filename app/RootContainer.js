@@ -8,7 +8,6 @@ import Map from './screens/Map';
 import { MainNavigator, Root } from './config/router';
 import RestaurantAdd from './screens/RestaurantAdd';
 import SomeComponent from './screens/Swipe';
-import RestaurantShowScreen from './screens/RestaurantShowScreen';
 
 class RootContainer extends Component {
   render() {
