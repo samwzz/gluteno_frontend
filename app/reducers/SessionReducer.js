@@ -3,11 +3,12 @@ import { merge } from 'lodash';
 
 const _nullUser = Object.freeze({
   currentUser: null,
-  errors: 
+  errors:
     {
       email: "",
       username: "",
-      password: ""
+      password: "",
+      non_field_errors: ""
     }
 });
 
