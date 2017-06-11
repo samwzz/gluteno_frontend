@@ -19,18 +19,21 @@ export const fetchRestaurant = id => (
 );
 
 export const createRestaurant = data => (
-  fetch('https://mywebsite.com/endpoint/', {
+  fetch('https://glutenbackend.herokuapp.com/api/restaurants/', {
   method: 'POST',
   headers: {
+    // Remove later and update with current user's token
     'Accept': 'application/json',
     'Content-Type': 'application/json',
+    'Authorization': 'Token ' + 'f11e63874755454f3e4b09743f08359f49612df8'
   },
     body: JSON.stringify({
       name: data.name,
       place_id: data.place_id,
-      lat:  data.lat,
+      lat: data.lat,
       lng:  data.lng,
       address: data.address,
+      phone: data.phone,
     })
   })
 );
