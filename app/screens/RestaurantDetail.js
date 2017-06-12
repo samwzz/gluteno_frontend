@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   restaurant: state.restaurant,
-  session: state.session
   currentUser: state.session.currentUser
 });
 
