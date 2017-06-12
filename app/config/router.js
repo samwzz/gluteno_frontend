@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Auth from '../screens/Auth';
@@ -8,7 +8,7 @@ import Map from '../screens/Map';
 import RestaurantList from '../screens/RestaurantList';
 import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
-// import Settings from '../screens/Settings';
+import Settings from '../screens/Settings';
 
 // export const MainNavigator = TabNavigator({
 //   Welcome: {
@@ -63,6 +63,24 @@ export const RestaurantsStack = StackNavigator({
   }
 });
 
+export const RestaurantAddStack = StackNavigator({
+  RestaurantAdd: {
+    screen: RestaurantAdd,
+    navigationOptions: {
+      headerTitle: 'Add Restaurant'
+    }
+  }
+});
+
+export const MapStack = StackNavigator({
+  Map: {
+    screen: Map,
+    navigationOptions: {
+      headerTitle: 'Map'
+    }
+  }
+});
+
 export const Tabs = TabNavigator({
   Restaurants: {
     screen: RestaurantsStack,
@@ -72,14 +90,14 @@ export const Tabs = TabNavigator({
     }
   },
   Map: {
-    screen: Map,
+    screen: MapStack,
     navigationOptions: {
       tabBarLabel: 'Map',
       tabBarIcon: ({ tintColor }) => <Icon name="map" size={35} color={tintColor} />,
     }
   },
   RestaurantAdd: {
-    screen: RestaurantAdd,
+    screen: RestaurantAddStack,
     navigationOptions: {
       tabBarLabel: 'Add location',
       tabBarIcon: ({ tintColor }) => <Icon name="add-location" size={35} color={tintColor} />,
@@ -97,6 +115,14 @@ export const Tabs = TabNavigator({
 //   }
 // });
 
+export const Drawer = DrawerNavigator({
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      drawerLabel: 'Settings',
+    }
+  }
+});
 
 export const Root = StackNavigator({
   Tabs: {

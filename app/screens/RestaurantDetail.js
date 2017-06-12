@@ -17,7 +17,7 @@ class RestaurantDetail extends Component {
   }
 
   render() {
-    console.log(this.props.navigation.state.params);
+    // console.log(this.props.navigation.state.params);
     const { name, address, phone_number, lat, lng } = this.props.navigation.state.params;
 
     return(
