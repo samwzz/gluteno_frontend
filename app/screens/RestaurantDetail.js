@@ -32,7 +32,8 @@ class RestaurantDetail extends Component {
 
 
   render() {
-
+    console.log('hi');
+    console.log(this.props.session);
     // console.log(this.props.navigation.state.params);
     const { name, address, phone_number, lat, lng } = this.props.navigation.state.params;
 
@@ -44,9 +45,25 @@ class RestaurantDetail extends Component {
           <Text>{ name }</Text>
         </CardSection>
 
-        <CardSection>
-          <Text> Likes/Dislikes Container Here </Text>
-        </CardSection>
+        <Swipeable
+          leftContent={(
+            <View style={[styles.leftSwipeItem, {backgroundColor: 'lightskyblue'}]}>
+              <Text>Pull action</Text>
+            </View>
+          )}
+          rightButtons={[
+            <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'lightseagreen'}]}>
+              <Text>1</Text>
+            </TouchableOpacity>,
+            <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'orchid'}]}>
+              <Text>2</Text>
+            </TouchableOpacity>
+          ]}
+        >
+          <View style={[styles.listItem, {backgroundColor: 'salmon'}]}>
+            <Text>Swipe Right to Like</Text>
+          </View>
+        </Swipeable>
 
         <CardSection>
           <Text>{ address }</Text>
@@ -58,26 +75,6 @@ class RestaurantDetail extends Component {
         <CardSection>
           <Text> Map goes here </Text>
         </CardSection>
-
-        <Swipeable
-        leftContent={(
-          <View style={[styles.leftSwipeItem, {backgroundColor: 'lightskyblue'}]}>
-            <Text>Pull action</Text>
-          </View>
-        )}
-        rightButtons={[
-          <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'lightseagreen'}]}>
-            <Text>1</Text>
-          </TouchableOpacity>,
-          <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'orchid'}]}>
-            <Text>2</Text>
-          </TouchableOpacity>
-        ]}
-      >
-        <View style={[styles.listItem, {backgroundColor: 'salmon'}]}>
-          <Text>Example 1</Text>
-        </View>
-      </Swipeable>
 
       </Card>
     );
@@ -111,7 +108,8 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => ({
-  restaurant: state.restaurant
+  restaurant: state.restaurant,
+  session: state.session
 });
 
 const mapDispatchToProps = (dispatch) => ({
