@@ -127,7 +127,7 @@ export const MainNavigator = TabNavigator({
   }
 }, {
   navigationOptions: {
-    // tabBarVisible: false
+    tabBarVisible: false
   },
   lazy: true
 });

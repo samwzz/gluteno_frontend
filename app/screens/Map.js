@@ -22,17 +22,27 @@ class Map extends Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   onRegionChange(region) {
     this.setState({ region });
   }
 
   onButtonPress() {
+    const currentRegion = this.state.region;
     this.props.fetchRestaurants()
-    .then(() => this.setState({ markers: this.props.restaurants }));
+    .then(() => {
+      this.setState({ markers: this.props.restaurants });
+      this.setState({ region: currentRegion });
+      }
+    );
   }
 
   render() {
-    // console.log(this.state.markers);
+    const { markers } = this.state;
+    // console.log(markers);
     return (
       <View style={styles.container}>
         <MapView
@@ -40,13 +50,16 @@ class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
           >
-          {this.state.markers.map(marker => (
+          {markers.map(marker => (
             <MapView.Marker
               key={marker.id}
-              coordinate={`${marker.lat}, ${marker.lng}`}
+              coordinate={{
+                latitude: marker.lat,
+                longitude: marker.lng
+              }}
               title={marker.name}
               description={marker.address}
-            />
+              />
           ))}
         </MapView>
         <View style={styles.buttonContainer}>
