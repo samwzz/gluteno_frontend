@@ -5,7 +5,7 @@ import AuthForm from './components/AuthForm';
 import Login from './components/Login';
 import RestaurantList from './screens/RestaurantList';
 import Map from './screens/Map';
-import { MainNavigator, Root } from './config/router';
+import { MainNavigator, Root, Drawer } from './config/router';
 import RestaurantAdd from './screens/RestaurantAdd';
 import SomeComponent from './screens/Swipe';
 

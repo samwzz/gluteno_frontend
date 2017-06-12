@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-native';
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -9,6 +10,7 @@ import RestaurantList from '../screens/RestaurantList';
 import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
 import Settings from '../screens/Settings';
+import DrawerButton from '../components/common/DrawerButton';
 
 // export const MainNavigator = TabNavigator({
 //   Welcome: {
@@ -48,17 +50,23 @@ import Settings from '../screens/Settings';
 //   lazy: true
 // });
 
+const LeftDrawerButton = (navigate) => (
+  <DrawerButton title="Open" onPress={() => navigate('DrawerOpen')} />
+);
+
 export const RestaurantsStack = StackNavigator({
   Restaurants: {
     screen: RestaurantList,
-    navigationOptions: {
-      title: 'Restaurants'
-    }
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: 'Restaurants',
+      headerLeft: LeftDrawerButton(navigation.navigate)
+    })
   },
   Detail: {
     screen: RestaurantDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name}`,
+      headerLeft: LeftDrawerButton(navigation.navigate)
     })
   }
 });
@@ -66,18 +74,20 @@ export const RestaurantsStack = StackNavigator({
 export const RestaurantAddStack = StackNavigator({
   RestaurantAdd: {
     screen: RestaurantAdd,
-    navigationOptions: {
-      headerTitle: 'Add Restaurant'
-    }
-  }
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: 'Add Restaurant',
+      headerLeft: LeftDrawerButton(navigation.navigate)
+    })
+  },
 });
 
 export const MapStack = StackNavigator({
   Map: {
     screen: Map,
-    navigationOptions: {
-      headerTitle: 'Map'
-    }
+    navigationOptions: ({ navigation }) => ({
+      headerTitle: 'Map',
+      headerLeft: LeftDrawerButton(navigation.navigate)
+    })
   }
 });
 
@@ -115,7 +125,7 @@ export const Tabs = TabNavigator({
 //   }
 // });
 
-export const Drawer = DrawerNavigator({
+export const SettingsDrawer = DrawerNavigator({
   Settings: {
     screen: Settings,
     navigationOptions: {
@@ -128,9 +138,9 @@ export const Root = StackNavigator({
   Tabs: {
     screen: Tabs,
   },
-  // Settings: {
-  //   Screen: SettingsStack
-  // }
+  Settings: {
+    screen: SettingsDrawer
+  }
 }, {
   mode: 'modal',
   headerMode: 'none'
