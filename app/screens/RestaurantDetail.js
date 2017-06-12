@@ -14,6 +14,7 @@ class RestaurantDetail extends Component {
   componentDidMount() {
     // this.props.fetchRestaurantDetails(this.props.match.params.id);
     // this.props.fetchRestaurantMap(this.props.match.params.id);
+    console.log(this.props.currentUser);
   }
 
   render() {
@@ -49,7 +50,8 @@ class RestaurantDetail extends Component {
 
 
 const mapStateToProps = (state) => ({
-  restaurant: state.restaurant
+  restaurant: state.restaurant,
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
