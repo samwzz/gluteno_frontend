@@ -22,6 +22,10 @@ class Map extends Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   onRegionChange(region) {
     this.setState({ region });
   }
@@ -32,7 +36,8 @@ class Map extends Component {
   }
 
   render() {
-    // console.log(this.state.markers);
+    const { markers } = this.state;
+    // console.log(markers);
     return (
       <View style={styles.container}>
         <MapView
@@ -40,10 +45,13 @@ class Map extends Component {
           region={this.state.region}
           onRegionChange={this.onRegionChange.bind(this)}
           >
-          {this.state.markers.map(marker => (
+          {markers.map(marker => (
             <MapView.Marker
               key={marker.id}
-              coordinate={`${marker.lat}, ${marker.lng}`}
+              coordinate={{
+                latitude: marker.lat,
+                longitude: marker.lng
+              }}
               title={marker.name}
               description={marker.address}
             />
