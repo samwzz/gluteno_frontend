@@ -74,14 +74,6 @@ class SignUp extends Component {
             Sign up
           </Text>
         </TouchableHighlight>
-
-        <Text>{this.state.token}</Text>
-
-        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
-          <Text style={styles.buttonText}>
-            Logout
-          </Text>
-        </TouchableHighlight>
       </View>
     );
   }

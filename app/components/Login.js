@@ -42,7 +42,7 @@ class Login extends Component {
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          Login to GlutNo
+          Login to G.No
         </Text>
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
@@ -62,13 +62,6 @@ class Login extends Component {
         <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
             Login
-          </Text>
-        </TouchableHighlight>
-
-        <Text>{this.state.token}</Text>
-        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
-          <Text style={styles.buttonText}>
-            Logout
           </Text>
         </TouchableHighlight>
       </View>
