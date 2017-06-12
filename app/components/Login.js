@@ -42,7 +42,7 @@ class Login extends Component {
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          Login to See-n-Me
+          Login to GlutNo
         </Text>
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
