@@ -20,6 +20,7 @@ class RestaurantDetail extends Component {
   componentDidMount() {
     // this.props.fetchRestaurantDetails(this.props.match.params.id);
     // this.props.fetchRestaurantMap(this.props.match.params.id);
+    console.log(this.props.currentUser);
   }
 
   handleScroll() {
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   restaurant: state.restaurant,
   session: state.session
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = (dispatch) => ({

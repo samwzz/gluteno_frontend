@@ -15,8 +15,13 @@ class RestaurantList extends Component {
     super(props);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchRestaurants();
+      // console.log(this.props.currentUser);
+  }
+
+  componentDidUpdate() {
+
   }
 
   onLearnMore(restaurant) {
@@ -69,7 +74,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  restaurants: selectRestaurants(state)
+  restaurants: selectRestaurants(state),
+  currentUser: state.session.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

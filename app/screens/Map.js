@@ -1,43 +1,96 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchRestaurants, fetchRestaurant } from '../actions/RestaurantActions';
+import { selectRestaurants } from '../reducers/selectors';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Button } from 'react-native-elements';
 
 const { height, width } = Dimensions.get('window');
 
-class MapScreen extends Component {
+class Map extends Component {
+  constructor() {
+    super();
+    this.state = {
+      region: {
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      markers: []
+    };
+  }
+
+  onRegionChange(region) {
+    this.setState({ region });
+  }
+
+  onButtonPress() {
+    this.props.fetchRestaurants()
+    .then(() => this.setState({ markers: this.props.restaurants }));
+  }
+
   render() {
+    // console.log(this.state.markers);
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Map Screen</Text>
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          region={this.state.region}
+          onRegionChange={this.onRegionChange.bind(this)}
+          >
+          {this.state.markers.map(marker => (
+            <MapView.Marker
+              key={marker.id}
+              coordinate={`${marker.lat}, ${marker.lng}`}
+              title={marker.name}
+              description={marker.address}
+            />
+          ))}
+        </MapView>
+        <View style={styles.buttonContainer}>
+          <Button
+            large
+            title="Search this area"
+            backgroundColor='#009688'
+            icon={{name: 'search'}}
+            onPress={this.onButtonPress.bind(this)}
+            />
+        </View>
       </View>
     );
   }
 }
-// const MapScreen = () => (
-//   <View style={styles.container}>
-//     <MapView
-//
-//       style={styles.map}
-//       initialRegion={{
-//         latitude: 37.78825,
-//         longitude: -122.4324,
-//         latitudeDelta: 0.0922,
-//         longitudeDelta: 0.0421,
-//       }}
-//       />
-//   </View>
-// );
-//
-// const styles = StyleSheet.create({
-//   container: {
-//     ...StyleSheet.absoluteFillObject,
-//     top: 20
-//   },
-//   map: {
-//     ...StyleSheet.absoluteFillObject,
-//     height: height,
-//     width: width
-//   }
-// });
 
-export default MapScreen;
+const styles = StyleSheet.create({
+  container: {
+    // ...StyleSheet.absoluteFillObject,
+    flex: 1,
+  },
+  map: {
+    // ...StyleSheet.absoluteFillObject,
+    // height: height,
+    // width: width
+    flex: 1,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0
+  }
+});
+
+const mapStateToProps = state => ({
+  restaurants: selectRestaurants(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchRestaurants: () => dispatch(fetchRestaurants())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Map);

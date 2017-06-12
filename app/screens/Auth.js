@@ -10,7 +10,7 @@ class Auth extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.currentUser);
+    // console.log(nextProps.currentUser);
     if (nextProps.currentUser) {
       this.checkAuth();
     }

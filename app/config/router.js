@@ -74,7 +74,11 @@ export const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Icon name="add-location" size={35} color={tintColor} />,
     }
   }
-
+},{
+  navigationOptions: {
+    // tabBarVisible: false
+  },
+  lazy: true
 });
 
 // export const SettingsStack = StackNavigator({
