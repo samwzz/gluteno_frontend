@@ -10,48 +10,10 @@ import RestaurantList from '../screens/RestaurantList';
 import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
 import Settings from '../screens/Settings';
-import DrawerButton from '../components/common/DrawerButton';
+import MenuButton from '../components/common/MenuButton';
 
-// export const MainNavigator = TabNavigator({
-//   Welcome: {
-//     screen: Welcome
-//   },
-//   Auth: {
-//     screen: Auth
-//   },
-//   Main: {
-//     screen: TabNavigator({
-//       map: {
-//         screen: Map
-//       },
-//       deck: {
-//         screen: Restaurants
-//       },
-//       restaurant: {
-//         screen: StackNavigator({
-//           details: {
-//             screen: TabNavigator({
-//               detail: {
-//                 screen: RestaurantDetail
-//               }
-//             })
-//           }
-//         })
-//       },
-//       add: {
-//         screen: RestaurantAdd
-//       }
-//     })
-//   }
-// }, {
-//   navigationOptions: {
-//     // tabBarVisible: false
-//   },
-//   lazy: true
-// });
-
-const LeftDrawerButton = (navigate) => (
-  <DrawerButton title="Open" onPress={() => navigate('DrawerOpen')} />
+const LeftMenuButton = (navigate) => (
+  <MenuButton title="Open" onPress={() => navigate('DrawerOpen')} />
 );
 
 export const RestaurantsStack = StackNavigator({
@@ -59,14 +21,13 @@ export const RestaurantsStack = StackNavigator({
     screen: RestaurantList,
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Restaurants',
-      headerLeft: LeftDrawerButton(navigation.navigate)
+      headerLeft: LeftMenuButton(navigation.navigate)
     })
   },
   Detail: {
     screen: RestaurantDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name}`,
-      headerLeft: LeftDrawerButton(navigation.navigate)
     })
   }
 });
@@ -76,7 +37,7 @@ export const RestaurantAddStack = StackNavigator({
     screen: RestaurantAdd,
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Add Restaurant',
-      headerLeft: LeftDrawerButton(navigation.navigate)
+      headerLeft: LeftMenuButton(navigation.navigate)
     })
   },
 });
@@ -86,7 +47,7 @@ export const MapStack = StackNavigator({
     screen: Map,
     navigationOptions: ({ navigation }) => ({
       headerTitle: 'Map',
-      headerLeft: LeftDrawerButton(navigation.navigate)
+      headerLeft: LeftMenuButton(navigation.navigate)
     })
   }
 });
@@ -144,4 +105,25 @@ export const Root = StackNavigator({
 }, {
   mode: 'modal',
   headerMode: 'none'
+});
+
+export const MainNavigator = TabNavigator({
+  Welcome: {
+    screen: Welcome
+  },
+  Auth: {
+    screen: Auth
+  },
+  Main: {
+    screen: Root,
+    navigationOptions: {
+      tabBarLabel: 'Main',
+      tabBarIcon: ({ tintColor }) => <Icon name="directions-run" size={35} color={tintColor} />,
+    }
+  }
+}, {
+  navigationOptions: {
+    // tabBarVisible: false
+  },
+  lazy: true
 });

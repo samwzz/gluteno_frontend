@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-const DrawerButton = ({ onPress }) => {
+const MenuButton = ({ onPress }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -16,4 +16,4 @@ const DrawerButton = ({ onPress }) => {
   );
 };
 
-export default DrawerButton;
+export default MenuButton;

@@ -22,9 +22,11 @@ class RestaurantAdd extends Component {
     console.log('Pressed!');
     // console.log(this.state);
 
-    const { name, place_id, lat, lng, address, phone_number } = this.state;
+    const { phone_number, name, place_id, lat, lng, address } = this.state;
+    // console.log(phone_number);
     this.props.createRestaurant( { name, place_id, lat, lng, address, phone_number } );
 
+    // console.log(this.state);
     // console.log(this.props.restaurants);
   }
 
@@ -32,7 +34,7 @@ class RestaurantAdd extends Component {
 
     const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
     const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818, lng: 2.2940881 } }};
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <View style={{ flex: 1 }}>
         <View style={{

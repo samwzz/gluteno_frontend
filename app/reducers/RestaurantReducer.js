@@ -7,14 +7,13 @@ import { RECEIVE_RESTAURANTS,
 
 const defaultRestaurant = Object.freeze({
   0: {
-    title: "",
-    description: "",
+    name: "",
+    address: "",
+    phone_number: "",
+    lat: "",
+    lng: "",
     image_url: "",
-    user_id: null,
-    album_id: null,
-    tags: [],
-    errors: [],
-    user: {}
+    place_id: ""
   }
 });
 

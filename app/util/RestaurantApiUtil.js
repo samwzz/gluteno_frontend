@@ -40,7 +40,7 @@ export const createRestaurant = data => (
       lat: data.lat,
       lng:  data.lng,
       address: data.address,
-      phone: data.phone,
+      phone_number: data.phone_number,
     })
   })
 );
