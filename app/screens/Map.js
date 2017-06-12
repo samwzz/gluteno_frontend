@@ -31,8 +31,13 @@ class Map extends Component {
   }
 
   onButtonPress() {
+    const currentRegion = this.state.region;
     this.props.fetchRestaurants()
-    .then(() => this.setState({ markers: this.props.restaurants }));
+    .then(() => {
+      this.setState({ markers: this.props.restaurants });
+      this.setState({ region: currentRegion });
+      }
+    );
   }
 
   render() {
@@ -54,7 +59,7 @@ class Map extends Component {
               }}
               title={marker.name}
               description={marker.address}
-            />
+              />
           ))}
         </MapView>
         <View style={styles.buttonContainer}>
