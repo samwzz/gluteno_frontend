@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableHighlight, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { fetchRestaurantDetails,
          receiveRestaurantDetails,
          receiveRestaurantMap } from '../actions/RestaurantDetailsActions';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from '../components/common';
 import Swipeable from 'react-native-swipeable';
+import MapView from 'react-native-maps';
+
+const { height, width } = Dimensions.get('window');
 
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props);
-
+    const { lat, lng } = this.props.navigation.state.params;
     this.state = {
-      currentlyOpenSwipeable: null
+      currentlyOpenSwipeable: null,
+      region: {
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      markers: []
     };
   }
 
@@ -31,12 +41,15 @@ class RestaurantDetail extends Component {
     }
   }
 
+  onRegionChange(region) {
+    this.setState({ region });
+  }
 
   render() {
     console.log('hi');
     console.log(this.props.session);
     // console.log(this.props.navigation.state.params);
-    const { name, address, phone_number, lat, lng } = this.props.navigation.state.params;
+    const { id, name, address, phone_number, lat, lng } = this.props.navigation.state.params;
 
     const {currentlyOpenSwipeable} = this.state;
 
@@ -73,10 +86,23 @@ class RestaurantDetail extends Component {
           <Text>{ phone_number }</Text>
         </CardSection>
 
-        <CardSection>
-          <Text> Map goes here </Text>
+        <CardSection style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            region={this.state.region}
+            onRegionChange={this.onRegionChange.bind(this)}
+            >
+            <MapView.Marker
+              key={id}
+              coordinate={{
+                latitude: lat,
+                longitude: lng
+              }}
+              title={name}
+              description={address}
+              />
+          </MapView>
         </CardSection>
-
       </Card>
     );
   }
@@ -104,7 +130,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 20
   },
-
+  // mapContainer: {
+  //   flex: 1
+  // },
+  map: {
+    // ...StyleSheet.absoluteFillObject,
+    height: height,
+    width: width,
+    flex: 1,
+  },
 });
 
 
