@@ -12,7 +12,7 @@ class Settings extends Component {
   onLogoutPressed() {
     AsyncStorage.removeItem("access_token")
     .then(result => this.setState({ result: "" }))
-    .then(() => this.props.navigation.navigate('Auth'));
+    .then(() => this.props.navigation.navigate('Login'));
   }
 
   render() {

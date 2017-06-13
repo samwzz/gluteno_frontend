@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button } from 'react-native';
+// import { Button } from 'react-native';
 import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 
 import Auth from '../screens/Auth';
+import Login from '../screens/Login';
+import SignUp from '../screens/SignUp';
 import Welcome from '../screens/Welcome';
 import Map from '../screens/Map';
 import RestaurantList from '../screens/RestaurantList';
@@ -111,12 +113,33 @@ export const Root = StackNavigator({
   headerMode: 'none'
 });
 
+export const LoginStack = StackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <Button title="Sign up" onPress={() => navigation.navigate('SignUp')} />
+    })
+  },
+});
+
+export const SignUpStack = StackNavigator({
+  SignUp: {
+    screen: SignUp,
+    navigationOptions: ({ navigation }) => ({
+      headerRight: <Button title="Login" onPress={() => navigation.navigate('Login')} />
+    })
+  },
+});
+
 export const MainNavigator = TabNavigator({
   Welcome: {
     screen: Welcome
   },
-  Auth: {
-    screen: Auth
+  Login: {
+    screen: LoginStack
+  },
+  SignUp: {
+    screen: SignUpStack
   },
   Main: {
     screen: Root,

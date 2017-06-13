@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, AsyncStorage } from 'react-native';
-import Login from '../components/Login';
-import SignUp from '../components/SignUp';
+// import Login from '../components/Login';
+// import SignUp from '../components/SignUp';
 
 class Auth extends Component {
   componentWillMount() {

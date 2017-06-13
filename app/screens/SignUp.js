@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { login, logout, receiveErrors } from '../actions/SessionActions';
+import { signup, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -11,24 +11,36 @@ import { View,
 
 const ACCESS_TOKEN = "access_token";
 
-class Login extends Component {
+class SignUp extends Component {
   constructor() {
     super();
     this.state = {
+      email: "",
       username: "",
       password: "",
       token: ""
     };
   }
 
-  componentDidUpdate() {
-    AsyncStorage.getItem("access_token")
-    .then(token => this.setState({ token }));
+  componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.currentUser);
+    if (nextProps.currentUser) {
+      this.checkAuth();
+    }
   }
 
-  onLoginPressed() {
-    const { username, password } = this.state;
-    this.props.login({ username, password });
+  checkAuth() {
+    AsyncStorage.getItem('access_token')
+    .then(token => {
+      if (token) {
+        this.props.navigation.navigate('Map');
+      }
+    });
+  }
+
+  onSignupPressed() {
+    const { email, username, password } = this.state;
+    this.props.signup({ email, username, password });
   }
 
   onLogoutPressed() {
@@ -37,17 +49,31 @@ class Login extends Component {
     .then(result => this.setState({ result: "" }));
   }
 
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(token => this.setState({ token }));
+  }
+
   render() {
     const { errors } = this.props;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          Login to G.No
+          Sign up for GluteNo
         </Text>
+
+        <TextInput
+          onChangeText={ (text)=> this.setState({email: text}) }
+          style={styles.input} placeholder="Email">
+        </TextInput>
+
+        <Text style={styles.error}> { errors.email } </Text>
+
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
+
         <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
@@ -56,12 +82,12 @@ class Login extends Component {
           placeholder="Password"
           secureTextEntry={true}>
         </TextInput>
-        <Text style={styles.error}> { errors.password } </Text>
-        <Text style={styles.error}> { errors.non_field_errors } </Text>
 
-        <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
+        <Text style={styles.error}> { errors.password } </Text>
+
+        <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
-            Login
+            Sign up
           </Text>
         </TouchableHighlight>
       </View>
@@ -69,12 +95,13 @@ class Login extends Component {
   }
 }
 
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#F5FCFF',
     padding: 10,
     paddingTop: 80
   },
@@ -88,14 +115,14 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#48bbec',
+    backgroundColor: '#48BBEC',
     alignSelf: 'stretch',
     marginTop: 10,
     justifyContent: 'center'
   },
   buttonText: {
     fontSize: 22,
-    color: '#fff',
+    color: '#FFF',
     alignSelf: 'center'
   },
   heading: {
@@ -118,10 +145,10 @@ const mapStateToProps = ({ session }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user))
+  signup: (user) => dispatch(signup(user))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(SignUp);

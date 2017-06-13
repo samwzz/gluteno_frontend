@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { signup, receiveErrors } from '../actions/SessionActions';
+import { login, logout, receiveErrors } from '../actions/SessionActions';
 import { View,
   Text,
   TextInput,
@@ -11,20 +11,40 @@ import { View,
 
 const ACCESS_TOKEN = "access_token";
 
-class SignUp extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
       username: "",
       password: "",
       token: ""
     };
   }
 
-  onSignupPressed() {
-    const { email, username, password } = this.state;
-    this.props.signup({ email, username, password });
+  componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.currentUser);
+    if (nextProps.currentUser) {
+      this.checkAuth();
+    }
+  }
+
+  checkAuth() {
+    AsyncStorage.getItem('access_token')
+    .then(token => {
+      if (token) {
+        this.props.navigation.navigate('Map');
+      }
+    });
+  }
+
+  componentDidUpdate() {
+    AsyncStorage.getItem("access_token")
+    .then(token => this.setState({ token }));
+  }
+
+  onLoginPressed() {
+    const { username, password } = this.state;
+    this.props.login({ username, password });
   }
 
   onLogoutPressed() {
@@ -33,31 +53,17 @@ class SignUp extends Component {
     .then(result => this.setState({ result: "" }));
   }
 
-  componentDidUpdate() {
-    AsyncStorage.getItem("access_token")
-    .then(token => this.setState({ token }));
-  }
-
   render() {
     const { errors } = this.props;
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          SignUp for See-n-Me
+          Login to GluteNo
         </Text>
-
-        <TextInput
-          onChangeText={ (text)=> this.setState({email: text}) }
-          style={styles.input} placeholder="Email">
-        </TextInput>
-
-        <Text style={styles.error}> { errors.email } </Text>
-
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
-
         <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
@@ -66,12 +72,12 @@ class SignUp extends Component {
           placeholder="Password"
           secureTextEntry={true}>
         </TextInput>
-
         <Text style={styles.error}> { errors.password } </Text>
+        <Text style={styles.error}> { errors.non_field_errors } </Text>
 
-        <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
+        <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
           <Text style={styles.buttonText}>
-            Sign up
+            Login
           </Text>
         </TouchableHighlight>
       </View>
@@ -79,13 +85,12 @@ class SignUp extends Component {
   }
 }
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
     padding: 10,
     paddingTop: 80
   },
@@ -99,14 +104,14 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#48BBEC',
+    backgroundColor: '#48bbec',
     alignSelf: 'stretch',
     marginTop: 10,
     justifyContent: 'center'
   },
   buttonText: {
     fontSize: 22,
-    color: '#FFF',
+    color: '#fff',
     alignSelf: 'center'
   },
   heading: {
@@ -129,10 +134,10 @@ const mapStateToProps = ({ session }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  signup: (user) => dispatch(signup(user))
+  login: (user) => dispatch(login(user))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SignUp);
+)(Login);

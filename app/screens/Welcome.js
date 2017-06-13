@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, AsyncStorage } from 'react-native';
-import Login from '../components/Login';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
@@ -22,7 +21,7 @@ class Welcome extends Component {
   }
 
   onSlidesComplete() {
-    this.props.navigation.navigate('Auth');
+    this.props.navigation.navigate('Login');
   }
 
   render() {
