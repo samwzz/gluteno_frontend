@@ -54,10 +54,11 @@ const styles = {
   },
   slideText: {
     fontSize: 30,
-    color: 'white'
+    color: 'white',
+    padding: 10,
   },
   slideButton: {
-    backgroundColor: '#0288D1',
+    backgroundColor: '#AF4425',
   }
 };
 

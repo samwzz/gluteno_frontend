@@ -4,9 +4,9 @@ import { View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/Slides';
 
 const SLIDE_DATA = [
-  { text: 'Welcome to Gluteno', color: '#03A9F4' },
-  { text: 'Use this app to find a gluten free restaurant', color: '#009688' },
-  { text: 'Set your location, then swipe away', color: '#03A9F4' }
+  { text: 'Welcome to Gluteno', color: '#AF4425' },
+  { text: 'Use this app to find a gluten free restaurant', color: '#662E1C' },
+  { text: 'Set your location, then swipe away', color: '#C9A66B' }
 ];
 
 class Welcome extends Component {
