@@ -58,7 +58,7 @@ class Login extends Component {
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          Login to GluteNo
+          Login to Gluteno
         </Text>
         <TextInput
           onChangeText={ (text)=> this.setState({username: text}) }

@@ -59,7 +59,7 @@ class SignUp extends Component {
     return(
       <View style={styles.container}>
         <Text style={styles.heading}>
-          Sign up for GluteNo
+          Sign up for Gluteno
         </Text>
 
         <TextInput
