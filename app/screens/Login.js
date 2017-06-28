@@ -61,12 +61,14 @@ class Login extends Component {
           Login to Gluteno
         </Text>
         <TextInput
+          autoCapitalize='none'
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
         <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
+          autoCapitalize='none'
           onChangeText={ (text)=> this.setState({password: text}) }
           style={styles.input}
           placeholder="Password"
