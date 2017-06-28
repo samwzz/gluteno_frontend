@@ -76,8 +76,11 @@ export const Tabs = TabNavigator({
       tabBarLabel: 'Add location',
       tabBarIcon: ({ tintColor }) => <Icon name="add-location" size={35} color={tintColor} />,
     }
-  }
+  },
 },{
+  tabBarOptions: {
+    activeTintColor: colors.orange,
+  },
   navigationOptions: {
     // tabBarVisible: false
   },

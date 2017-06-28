@@ -4,6 +4,7 @@ import { createRestaurant } from '../actions/RestaurantActions';
 import { View, Text, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Button from 'react-native-button';
+import colors from '../config/colors';
 
 class RestaurantAdd extends Component {
   constructor() {
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     padding: 7,
     width: 120,
     borderRadius: 20,
-    backgroundColor: '#B3DE81',
+    backgroundColor: colors.orange,
     fontSize: 20,
     color: 'white',
   }

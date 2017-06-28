@@ -5,6 +5,7 @@ import { selectRestaurants } from '../reducers/selectors';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button } from 'react-native-elements';
+import colors from '../config/colors';
 
 const { height, width } = Dimensions.get('window');
 

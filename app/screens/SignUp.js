@@ -8,6 +8,7 @@ import { View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
+import colors from '../config/colors';
 
 const ACCESS_TOKEN = "access_token";
 
@@ -88,7 +89,10 @@ class SignUp extends Component {
 
         <Text style={styles.error}> { errors.password } </Text>
 
-        <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
+        <TouchableHighlight
+          onPress={this.onSignupPressed.bind(this)}
+          style={styles.button}
+          underlayColor={colors.brown}>
           <Text style={styles.buttonText}>
             Sign up
           </Text>
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#AF4425',
+    backgroundColor: colors.orange,
     alignSelf: 'stretch',
     marginTop: 10,
     justifyContent: 'center'
