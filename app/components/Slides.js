@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
+import colors from '../config/colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -58,7 +59,7 @@ const styles = {
     padding: 10,
   },
   slideButton: {
-    backgroundColor: '#AF4425',
+    backgroundColor: colors.orange,
   }
 };
 

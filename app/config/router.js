@@ -13,6 +13,7 @@ import RestaurantDetail from '../screens/RestaurantDetail';
 import RestaurantAdd from '../screens/RestaurantAdd';
 import Settings from '../screens/Settings';
 import MenuButton from '../components/common/MenuButton';
+import colors from './colors';
 
 const LeftMenuButton = (navigate) => (
   <MenuButton title="Open" onPress={() => navigate('DrawerOpen')} />
@@ -30,6 +31,8 @@ export const RestaurantsStack = StackNavigator({
     screen: RestaurantDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name}`,
+      headerTintColor: colors.orange,
+      headerTitleStyle: { color: 'black' }
     })
   }
 });
@@ -75,8 +78,11 @@ export const Tabs = TabNavigator({
       tabBarLabel: 'Add location',
       tabBarIcon: ({ tintColor }) => <Icon name="add-location" size={35} color={tintColor} />,
     }
-  }
+  },
 },{
+  tabBarOptions: {
+    activeTintColor: colors.orange,
+  },
   navigationOptions: {
     // tabBarVisible: false
   },
@@ -117,7 +123,7 @@ export const LoginStack = StackNavigator({
   Login: {
     screen: Login,
     navigationOptions: ({ navigation }) => ({
-      headerRight: <Button title="Sign up" onPress={() => navigation.navigate('SignUp')} />
+      headerRight: <Button backgroundColor={colors.tan} title="Sign up" onPress={() => navigation.navigate('SignUp')} />
     })
   },
 });
@@ -126,7 +132,7 @@ export const SignUpStack = StackNavigator({
   SignUp: {
     screen: SignUp,
     navigationOptions: ({ navigation }) => ({
-      headerRight: <Button title="Login" onPress={() => navigation.navigate('Login')} />
+      headerRight: <Button backgroundColor={colors.tan} title="Login" onPress={() => navigation.navigate('Login')} />
     })
   },
 });

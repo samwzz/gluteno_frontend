@@ -5,6 +5,7 @@ import { View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
+import colors from '../config/colors';
 
 const ACCESS_TOKEN = "access_token";
 
@@ -18,7 +19,13 @@ class Settings extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+        <Text style={styles.headerText}>
+          See you soon!
+        </Text>
+        <TouchableHighlight
+          onPress={this.onLogoutPressed.bind(this)}
+          style={styles.button}
+          underlayColor={colors.brown}>
           <Text style={styles.buttonText}>
             Logout
           </Text>
@@ -34,10 +41,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  headerText: {
+    fontSize: 24
+  },
   button: {
     height: 50,
-    backgroundColor: '#48bbec',
-    alignSelf: 'stretch',
+    width: 250,
+    backgroundColor: colors.orange,
+
     marginTop: 10,
     justifyContent: 'center'
   },

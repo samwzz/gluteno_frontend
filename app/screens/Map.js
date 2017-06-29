@@ -5,6 +5,7 @@ import { selectRestaurants } from '../reducers/selectors';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { Button } from 'react-native-elements';
+import colors from '../config/colors';
 
 const { height, width } = Dimensions.get('window');
 
@@ -13,8 +14,8 @@ class Map extends Component {
     super();
     this.state = {
       region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
+        latitude: 37.78424,
+        longitude: -122.4179,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
@@ -31,13 +32,23 @@ class Map extends Component {
   }
 
   onButtonPress() {
-    const currentRegion = this.state.region;
+    console.log(this.state.region);
+    const currentRegion = {
+      latitude: 37.78424,
+      longitude: -122.4179,
+      latitudeDelta: 0.0922,
+      longitudeDelta: 0.0421,
+    };
     this.props.fetchRestaurants()
     .then(() => {
       this.setState({ markers: this.props.restaurants });
       this.setState({ region: currentRegion });
       }
     );
+  }
+
+  getDirection() {
+    console.log("hi");
   }
 
   render() {

@@ -8,6 +8,7 @@ import { View,
   AsyncStorage,
   StyleSheet
 } from 'react-native';
+import colors from '../config/colors';
 
 const ACCESS_TOKEN = "access_token";
 
@@ -63,6 +64,7 @@ class SignUp extends Component {
         </Text>
 
         <TextInput
+          autoCapitalize='none'
           onChangeText={ (text)=> this.setState({email: text}) }
           style={styles.input} placeholder="Email">
         </TextInput>
@@ -70,6 +72,7 @@ class SignUp extends Component {
         <Text style={styles.error}> { errors.email } </Text>
 
         <TextInput
+          autoCapitalize='none'
           onChangeText={ (text)=> this.setState({username: text}) }
           style={styles.input} placeholder="Username">
         </TextInput>
@@ -77,6 +80,7 @@ class SignUp extends Component {
         <Text style={styles.error}> { errors.username } </Text>
 
         <TextInput
+          autoCapitalize='none'
           onChangeText={ (text)=> this.setState({password: text}) }
           style={styles.input}
           placeholder="Password"
@@ -85,7 +89,10 @@ class SignUp extends Component {
 
         <Text style={styles.error}> { errors.password } </Text>
 
-        <TouchableHighlight onPress={this.onSignupPressed.bind(this)} style={styles.button}>
+        <TouchableHighlight
+          onPress={this.onSignupPressed.bind(this)}
+          style={styles.button}
+          underlayColor={colors.brown}>
           <Text style={styles.buttonText}>
             Sign up
           </Text>
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
     padding: 10,
     paddingTop: 80
   },
@@ -111,11 +118,11 @@ const styles = StyleSheet.create({
     padding: 4,
     fontSize: 18,
     borderWidth: 1,
-    borderColor: '#48bbec'
+    borderColor: '#C9A66B'
   },
   button: {
     height: 50,
-    backgroundColor: '#48BBEC',
+    backgroundColor: colors.orange,
     alignSelf: 'stretch',
     marginTop: 10,
     justifyContent: 'center'

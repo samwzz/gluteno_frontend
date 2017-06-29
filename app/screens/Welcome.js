@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, AsyncStorage } from 'react-native';
 import Slides from '../components/Slides';
+import colors from '../config/colors';
 
 const SLIDE_DATA = [
-  { text: 'Welcome to Gluteno', color: '#AF4425' },
-  { text: 'Use this app to find a gluten free restaurant', color: '#662E1C' },
-  { text: 'Set your location, then swipe away', color: '#C9A66B' }
+  { text: 'Welcome to Gluteno', color: colors.orange },
+  { text: 'Use this app to find a gluten free restaurant', color: colors.brown },
+  { text: 'Set your location, then swipe away', color: colors.tan }
 ];
 
 class Welcome extends Component {
