@@ -22,7 +22,8 @@ class RestaurantAdd extends Component {
   _handlePress() {
     const { phone_number, name, place_id, lat, lng, address } = this.state;
     // console.log(phone_number);
-    this.props.createRestaurant({ name, place_id, lat, lng, address, phone_number });
+    this.props.createRestaurant({ name, place_id, lat, lng, address, phone_number })
+      .then(() => this.props.navigation.navigate('Restaurants'));
     // console.log(this.state);
     // console.log(this.props.restaurants);
   }

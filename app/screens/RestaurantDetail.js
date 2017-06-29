@@ -48,7 +48,7 @@ class RestaurantDetail extends Component {
   }
 
   ratingCompleted(rating) {
-    console.log("Rating is: " + rating)
+    console.log("Rating is: " + rating);
   }
 
   render() {
