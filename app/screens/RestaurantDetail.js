@@ -4,10 +4,11 @@ import { fetchRestaurantDetails,
          receiveRestaurantDetails,
          receiveRestaurantMap } from '../actions/RestaurantDetailsActions';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button } from '../components/common';
-import { Icon, Badge, Rating } from 'react-native-elements';
+import { Card, CardSection, Input } from '../components/common';
+import { Button, Icon, Badge, Rating } from 'react-native-elements';
 import Swipeable from 'react-native-swipeable';
 import MapView from 'react-native-maps';
+import getDirections from 'react-native-google-maps-directions';
 import colors from '../config/colors';
 
 const { height, width } = Dimensions.get('window');
@@ -27,7 +28,6 @@ class RestaurantDetail extends Component {
       markers: []
     };
   }
-
 
   componentDidMount() {
     // this.props.fetchRestaurantDetails(this.props.match.params.id);
@@ -51,6 +51,28 @@ class RestaurantDetail extends Component {
     console.log("Rating is: " + rating);
   }
 
+  handleGetDirections() {
+    const { lat, lng } = this.props.navigation.state.params;
+    const data = {
+       source: {
+        latitude: 37.78424,
+        longitude: -122.4129
+      },
+      destination: {
+        latitude: lat,
+        longitude: lng
+      },
+      params: [
+        {
+          key: "dirflg",
+          value: "w"
+        }
+      ]
+    };
+
+    getDirections(data);
+  }
+
   render() {
     console.log('hi');
     console.log(this.props.session);
@@ -66,6 +88,12 @@ class RestaurantDetail extends Component {
         </CardSection>
         <CardSection>
           <Text style={styles.text}>{ phone_number }</Text>
+        </CardSection>
+        <CardSection>
+          <Button raised icon={{name: 'navigation'}}
+            onPress={this.handleGetDirections.bind(this)}
+            title="Get Directions"
+            backgroundColor={colors.green}/>
         </CardSection>
         <CardSection>
           <View style={styles.buttonContainer}>
