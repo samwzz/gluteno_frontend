@@ -22,7 +22,10 @@ class Settings extends Component {
         <Text style={styles.headerText}>
           See you soon!
         </Text>
-        <TouchableHighlight onPress={this.onLogoutPressed.bind(this)} style={styles.button}>
+        <TouchableHighlight
+          onPress={this.onLogoutPressed.bind(this)}
+          style={styles.button}
+          underlayColor={colors.brown}>
           <Text style={styles.buttonText}>
             Logout
           </Text>

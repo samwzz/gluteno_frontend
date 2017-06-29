@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from '../components/common';
 import Swipeable from 'react-native-swipeable';
 import MapView from 'react-native-maps';
+import colors from '../config/colors';
 
 const { height, width } = Dimensions.get('window');
 
@@ -56,36 +57,21 @@ class RestaurantDetail extends Component {
     return(
       <Card>
         <CardSection>
-          <Text>{ name }</Text>
+          <Text style={styles.text}>{ address }</Text>
         </CardSection>
-
-        <Swipeable
-          leftContent={(
-            <View style={[styles.leftSwipeItem, {backgroundColor: 'lightskyblue'}]}>
-              <Text>Pull action</Text>
-            </View>
-          )}
-          rightButtons={[
-            <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'lightseagreen'}]}>
-              <Text>1</Text>
-            </TouchableOpacity>,
-            <TouchableOpacity style={[styles.rightSwipeItem, {backgroundColor: 'orchid'}]}>
-              <Text>2</Text>
+        <CardSection>
+          <Text style={styles.text}>{ phone_number }</Text>
+        </CardSection>
+        <CardSection>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Up vote</Text>
             </TouchableOpacity>
-          ]}
-        >
-          <View style={[styles.listItem, {backgroundColor: 'salmon'}]}>
-            <Text>Swipe Right to Like</Text>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Down vote</Text>
+            </TouchableOpacity>
           </View>
-        </Swipeable>
-
-        <CardSection>
-          <Text>{ address }</Text>
         </CardSection>
-        <CardSection>
-          <Text>{ phone_number }</Text>
-        </CardSection>
-
         <CardSection style={styles.mapContainer}>
           <MapView
             style={styles.map}
@@ -110,25 +96,33 @@ class RestaurantDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  buttonContainer: {
     flex: 1,
-    paddingTop: 20
-  },
-  listItem: {
-    height: 75,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  leftSwipeItem: {
-    flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    paddingRight: 20
+  text: {
+    textAlign: 'auto'
   },
-  rightSwipeItem: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingLeft: 20
+  // leftSwipeItem: {
+  //   flex: 1,
+  //   alignItems: 'flex-end',
+  //   justifyContent: 'center',
+  //   paddingRight: 20
+  // },
+  // rightSwipeItem: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   paddingLeft: 20
+  // },
+  button: {
+    height: 30,
+    width: 100,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    alignSelf: 'center'
   },
   // mapContainer: {
   //   flex: 1
