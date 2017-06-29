@@ -5,6 +5,7 @@ import { fetchRestaurantDetails,
          receiveRestaurantMap } from '../actions/RestaurantDetailsActions';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from '../components/common';
+import { Icon, Badge } from 'react-native-elements';
 import Swipeable from 'react-native-swipeable';
 import MapView from 'react-native-maps';
 import colors from '../config/colors';
@@ -65,10 +66,12 @@ class RestaurantDetail extends Component {
         <CardSection>
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Up vote</Text>
+              <Icon raised reverse name="thumb-down" color={colors.brown} />
+              <Badge value={1} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Down vote</Text>
+              <Icon raised reverse name="thumb-up" color={colors.orange} />
+              <Badge value={8} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
           </View>
         </CardSection>
@@ -117,8 +120,10 @@ const styles = StyleSheet.create({
   //   paddingLeft: 20
   // },
   button: {
-    height: 30,
+    height: 50,
     width: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center'
   },
   buttonText: {
