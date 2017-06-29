@@ -5,7 +5,7 @@ import { fetchRestaurantDetails,
          receiveRestaurantMap } from '../actions/RestaurantDetailsActions';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button } from '../components/common';
-import { Icon, Badge } from 'react-native-elements';
+import { Icon, Badge, Rating } from 'react-native-elements';
 import Swipeable from 'react-native-swipeable';
 import MapView from 'react-native-maps';
 import colors from '../config/colors';
@@ -47,6 +47,10 @@ class RestaurantDetail extends Component {
     this.setState({ region });
   }
 
+  ratingCompleted(rating) {
+    console.log("Rating is: " + rating)
+  }
+
   render() {
     console.log('hi');
     console.log(this.props.session);
@@ -66,13 +70,23 @@ class RestaurantDetail extends Component {
         <CardSection>
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button}>
-              <Icon raised reverse name="thumb-down" color={colors.brown} />
+              <Icon raised reverse name="thumb-down" color={colors.brown} size={24} />
               <Badge value={1} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
-              <Icon raised reverse name="thumb-up" color={colors.orange} />
+              <Icon raised reverse name="thumb-up" color={colors.orange} size={24} />
               <Badge value={8} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
+            <Rating
+              showRating
+              type="star"
+              fractions={1}
+              startingValue={3.6}
+              readonly
+              imageSize={30}
+              onFinishRating={this.ratingCompleted}
+              style={{ paddingVertical: 10 }}
+            />
           </View>
         </CardSection>
         <CardSection style={styles.mapContainer}>
@@ -103,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   },
   text: {
     textAlign: 'auto'
@@ -121,7 +135,7 @@ const styles = StyleSheet.create({
   // },
   button: {
     height: 50,
-    width: 100,
+    width: 90,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
