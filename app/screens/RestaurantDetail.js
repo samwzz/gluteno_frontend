@@ -25,7 +25,9 @@ class RestaurantDetail extends Component {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       },
-      markers: []
+      markers: [],
+      upvotes: 8,
+      downvotes: -1
     };
   }
 
@@ -73,8 +75,35 @@ class RestaurantDetail extends Component {
     getDirections(data);
   }
 
+  handleDownvote() {
+    const { lat, lng } = this.props.navigation.state.params;
+    const downvotes = this.state.downvotes - 1;
+    this.setState({
+      region: {
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      downvotes: downvotes
+    });
+  }
+
+  handleUpvote() {
+    const { lat, lng } = this.props.navigation.state.params;
+    const upvotes = this.state.upvotes + 1;
+    this.setState({
+      region: {
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      },
+      upvotes: upvotes
+    });
+  }
+
   render() {
-    console.log('hi');
     console.log(this.props.session);
     // console.log(this.props.navigation.state.params);
     const { id, name, address, phone_number, lat, lng } = this.props.navigation.state.params;
@@ -97,13 +126,13 @@ class RestaurantDetail extends Component {
         </CardSection>
         <CardSection>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.handleDownvote.bind(this)}>
               <Icon raised reverse name="thumb-down" color={colors.brown} size={24} />
-              <Badge value={1} textStyle={{ color: 'orange' }} />
+              <Badge value={this.state.downvotes} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={this.handleUpvote.bind(this)}>
               <Icon raised reverse name="thumb-up" color={colors.orange} size={24} />
-              <Badge value={8} textStyle={{ color: 'orange' }} />
+              <Badge value={this.state.upvotes} textStyle={{ color: 'orange' }} />
             </TouchableOpacity>
             <Rating
               showRating

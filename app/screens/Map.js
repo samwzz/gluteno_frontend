@@ -35,7 +35,7 @@ class Map extends Component {
     console.log(this.state.region);
     const currentRegion = {
       latitude: 37.78424,
-      longitude: -122.4129,
+      longitude: -122.4179,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     };

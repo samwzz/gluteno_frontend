@@ -31,6 +31,8 @@ export const RestaurantsStack = StackNavigator({
     screen: RestaurantDetail,
     navigationOptions: ({ navigation }) => ({
       title: `${navigation.state.params.name}`,
+      headerTintColor: colors.orange,
+      headerTitleStyle: { color: 'black' }
     })
   }
 });
